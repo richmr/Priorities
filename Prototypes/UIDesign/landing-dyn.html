@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="css/dynamic-chips.css"/>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	 
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<meta charset="utf-8" />
+<title>Priorities Landing page</title>
+</head>
+<body>
+	<!-- <div class="container"> -->
+		<!-- Everything should be in a single row.. -->
+		<div class="row">
+			<!-- Main page area -->
+			<!-- Left bar area/spacer -->
+			<div class="col s1">
+			</div>
+			<!-- Top action bar over the main table -->
+			<div class="col s9">
+				<br><br>
+				<div class="col s2 valign-wrapper">
+					<i class="small material-icons">undo</i>
+					<i class="small material-icons">redo</i>		
+				</div>
+				<div class="col s3 offset-s2 valign-wrapper">
+					Portfolio Title  <i class="small material-icons">arrow_drop_down</i>
+				</div>
+				<div class="col s2 offset-s3 valign-wrapper">
+					<i class="small material-icons" style="padding-right:5px">share</i>
+					<i class="small material-icons">list</i>
+				</div>
+				<!-- Priorities table should start here -->
+					<br>
+					<table class="striped">
+						<thead>
+							<tr>
+								<th> </th>
+								<th>Extreme</th>
+								<th>High   </th>
+								<th>Medium </th>
+								<th>Low    </th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- <tr>
+								<td>Person 1</td>
+								<td>
+									<a class="btn">Long title 1</a>
+									<br>
+									<a class="btn">Short 1     </a>
+								</td>
+								<td>
+									<a class="btn">Long title 1</a>
+									<br>
+									<a class="btn">Long title 2</a>
+								</td>
+								<td>
+									<a class="btn">Short       </a>
+									<br>
+									<a class="btn">Short       </a>
+								</td>
+								<td>
+									<a class="btn">in between  </a>
+									<br>
+									<a class="btn">in between  </a>
+								</td>
+							</tr> -->
+							<tr>
+								<td>Person 1</td>
+								<td>
+									<ul id="sortable-row1-1" class="row1Priorities">
+										<li><div id="priority-chip1" class="chip" style="border:2px solid red">Extreme 1</div></li>
+										<li><div id="priority-chip2" class="chip" style="border:2px solid green">Extreme 2</div></li>
+									</ul>
+								</td>
+								<td>
+									<ul id="sortable-row1-2" class="row1Priorities">
+										<li><div id="priority-chip3" class="chip" style="border:2px solid green">High 1</div></li>
+										<li><div id="priority-chip4" class="chip" style="border:2px solid yellow">High 2</div></li>
+									</ul>
+								</td>
+								<td>
+									<ul id="sortable-row1-3" class="row1Priorities">
+										<li><div id="priority-chip5" class="chip" style="border:2px solid green">Super long project name 1</div></li>
+										<li><div id="priority-chip6" class="chip" style="border:2px solid green">Medium 2</div></li>
+									</ul>
+								</td>
+								<td>
+									<ul id="sortable-row1-4" class="row1Priorities">
+										<li><div id="priority-chip" class="chip" style="border:2px solid green">Extreme 1</div></li>
+										<li><div class="chip" style="border:2px dashed gray">Drop a project here!</div></li>
+									</ul>
+								</td>
+							</tr>
+							<!-- Commented out just to simplify display for now<tr>
+								<td>Person 2</td>
+								<td>
+									<div id="priority-chip" class="chip" style="border:2px solid green">Extreme 1</div>
+									<br>
+									<div id="priority-chip" class="chip" style="border:2px solid green">Extreme 2</div>
+								</td>
+								<td>
+									<div id="priority-chip" class="chip flow-text" style="border:2px solid yellow">This is an extremely long project title</div>
+									<br>
+									<div id="priority-chip" class="chip" style="border:2px solid yellow">High 2</div>
+								</td>
+								<td>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+									<br>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+								</td>
+								<td>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+									<br>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+								</td>
+							</tr>
+							<tr>
+								<td>Person with long name</td>
+								<td>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+									<br>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+								</td>
+								<td>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+									<br>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+								</td>
+								<td>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+									<br>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+								</td>
+								<td>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+									<br>
+									<div class="chip" style="border:2px dashed gray">Drop a project here!</div>
+								</td>
+							</tr> -->
+							<!-- End of table content, "Add Row" next -->
+							<tr>
+								<td>
+									<i class="small material-icons" style="font-size: 2rem">add_circle_outline</i>
+								</td>
+							</tr>
+						</tbody>					
+					</table>
+					
+									
+			</div>
+			<!-- Test Divs, to show drop and intersecting rectangles -->
+			<div id="rect1" class="rect"></div>
+			<div id="rect2" class="rect" style="top:30;"></div>			
+			
+			
+			<!-- Side menu -->
+			<div class="col s2">
+				<br>
+				<div class="valign-wrapper">Username <i class="small material-icons">arrow_drop_down</i><br><br></div>
+				<i class="small material-icons" style="font-size: 3rem">fiber_new</i><br><br>
+				<i id="archive" class="small material-icons" style="font-size: 3rem">archive</i><br><br>
+				<i id="draggable" class="small material-icons" style="font-size: 3rem">sentiment_very_satisfied</i><br><br>
+				<i class="small material-icons" style="font-size: 3rem">delete_forever</i><br><br>
+			</div>	
+		
+							
+			
+		</div>
+	<script type="text/javascript" src="js/dynamic-chips.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<!-- </div> -->
+</body>
+</html>
