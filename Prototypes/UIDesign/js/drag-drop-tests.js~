@@ -1,0 +1,9 @@
+$(function() {
+	$("#chip1").draggable();
+	
+	$("#spot1").droppable({
+		classes: {
+			"ui-droppable-hover": "chip chip-placeholder-hover"
+		}
+	})
+})

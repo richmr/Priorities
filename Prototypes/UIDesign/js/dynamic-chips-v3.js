@@ -74,18 +74,32 @@ function intersectJQOandUI(JQO, UI) {
 
 $(function() {
 	//$( "#sortable" ).sortable();
-	//$('div[id^="priority"]' ).draggable();
+	$('div[id^="priority"]' ).draggable({
+      connectToSortable: ".row1Priorities",
+      // helper: "clone",
+      revert: "invalid"
+    });
+    $( "#sortable-row1-1, #sortable-row1-2, #sortable-row1-3, #sortable-row1-4" ).sortable({
+      connectWith: ".row1Priorities",
+      placeholder: "chip chip-placeholder",
+      // Added this to prevent crazy cursor grabbing
+      cursorAt: {left: 5}
+   });
 	//<ul id="sortable-row1-4" class="row1Priorities">
-	$( "#sortable-row1-1, #sortable-row1-2, #sortable-row1-3, #sortable-row1-4" ).sortable({
+	/*$( "#sortable-row1-1, #sortable-row1-2, #sortable-row1-3, #sortable-row1-4" ).sortable({
       connectWith: ".row1Priorities",
       placeholder: "chip chip-placeholder",
       // Added this to prevent crazy cursor grabbing
       cursorAt: {left: 5},
       out: function( event, ui ) {
-      	console.log("Chip moved out of list");
-      	// Persistent UI data
-      	ui.item.data("out", true);
-      	},
+      	console.log("Chip moved out of list.  Making it draggable");
+      	// Make it a draggable, but still connected
+      	ui.item.draggable({
+      		connectToSortable: ".row1Priorities",
+      		helper: "clone",
+      		revert: "invalid"
+    		});
+      },
       over: function( event, ui ) {
       	console.log("Chip moved in to list");
       	ui.item.data("out", false);
@@ -132,15 +146,11 @@ $(function() {
       		console.log("Chip inside of list on release")
       	}
        }
-      
-    });
-   $( "#sortable-row1-1, #sortable-row1-2, #sortable-row1-3, #sortable-row1-4" ).disableSelection();
-   $( "#archive").droppable({
+      */
+});
+
+$( "#archive").droppable({
    	drop: function( event, ui ) {
         console.log("Something was dropped on me");
       }
-   });
-   $( "#droppable").mouseenter(function() {
-  		console.log("Mouse is over me")
-  	});
-})
+ });   

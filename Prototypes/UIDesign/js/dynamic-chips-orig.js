@@ -80,7 +80,7 @@ $(function() {
       connectWith: ".row1Priorities",
       placeholder: "chip chip-placeholder",
       // Added this to prevent crazy cursor grabbing
-      cursorAt: {left: 5},
+      cursorAt: {left: 10},
       out: function( event, ui ) {
       	console.log("Chip moved out of list");
       	// Persistent UI data
@@ -138,7 +138,18 @@ $(function() {
    $( "#archive").droppable({
    	drop: function( event, ui ) {
         console.log("Something was dropped on me");
-      }
+      },
+      over: function( event, ui ) {
+			$(this).animate({
+				color: "blue"
+			});
+		},
+		out: function( event, ui ) {
+			$(this).animate({
+				color: "black"
+			});
+		},
+		tolerance: "pointer"
    });
    $( "#droppable").mouseenter(function() {
   		console.log("Mouse is over me")

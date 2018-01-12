@@ -82,10 +82,14 @@ $(function() {
       // Added this to prevent crazy cursor grabbing
       cursorAt: {left: 5},
       out: function( event, ui ) {
-      	console.log("Chip moved out of list");
-      	// Persistent UI data
-      	ui.item.data("out", true);
-      	},
+      	console.log("Chip moved out of list.  Making it draggable");
+      	// Make it a draggable, but still connected
+      	ui.item.draggable({
+      		connectToSortable: ".row1Priorities",
+      		helper: "clone",
+      		revert: "invalid"
+    		});
+      },
       over: function( event, ui ) {
       	console.log("Chip moved in to list");
       	ui.item.data("out", false);
@@ -137,7 +141,7 @@ $(function() {
    $( "#sortable-row1-1, #sortable-row1-2, #sortable-row1-3, #sortable-row1-4" ).disableSelection();
    $( "#archive").droppable({
    	drop: function( event, ui ) {
-        console.log("Something was dropped on me");
+        console.log("Archive: Something was dropped on me");
       }
    });
    $( "#droppable").mouseenter(function() {

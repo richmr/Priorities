@@ -1,7 +1,17 @@
+.chip-placeholder-blank {
+	width: 90px;
+}
+
+.chip-placeholder-hover {
+	width: 90px;
+	border: 1px dashed gray;
+}
+
 .chip-placeholder {
 	width: 90px;
-	border-style: dashed;
+	border: 2px dashed gray;
 }
+
 
 .rect {
 	position: fixed;

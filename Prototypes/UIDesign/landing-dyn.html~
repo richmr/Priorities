@@ -100,7 +100,7 @@
 									</ul>
 								</td>
 							</tr>
-							<!-- <tr>
+							<!-- Commented out just to simplify display for now<tr>
 								<td>Person 2</td>
 								<td>
 									<div id="priority-chip" class="chip" style="border:2px solid green">Extreme 1</div>
@@ -157,7 +157,7 @@
 					
 									
 			</div>
-			<!-- Test Divs, to show rectangles -->
+			<!-- Test Divs, to show drop and intersecting rectangles -->
 			<div id="rect1" class="rect"></div>
 			<div id="rect2" class="rect" style="top:30;"></div>			
 			
@@ -175,7 +175,7 @@
 							
 			
 		</div>
-	<script type="text/javascript" src="js/dynamic-chips.js"></script>
+	<script type="text/javascript" src="js/dynamic-chips-v3.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<!-- </div> -->
 </body>
