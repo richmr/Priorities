@@ -9,9 +9,22 @@
 
 .chip-placeholder {
 	width: 90px;
-	border: 1px dashed gray;
+	border: 2px dashed gray;
+}
+.chip-status-red {
+	width: 90px;
+	border: 2px solid red;
 }
 
+.chip-status-green {
+	width: 90px;
+	border: 2px solid green;
+}
+
+.chip-status-yellow {
+	width: 90px;
+	border: 2px solid yellow;
+}
 
 .rect {
 	position: fixed;

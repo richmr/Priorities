@@ -11,7 +11,17 @@
 	width: 90px;
 	border: 2px dashed gray;
 }
+.chip-status-red {
+	border: 2px solid red;
+}
 
+.chip-status-green {
+	border: 2px solid green;
+}
+
+.chip-status-yellow {
+	border: 2px solid yellow;
+}
 
 .rect {
 	position: fixed;

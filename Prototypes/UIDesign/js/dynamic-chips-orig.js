@@ -77,29 +77,43 @@ $(function() {
 	//$('div[id^="priority"]' ).draggable();
 	//<ul id="sortable-row1-4" class="row1Priorities">
 	$( "#sortable-row1-1, #sortable-row1-2, #sortable-row1-3, #sortable-row1-4" ).sortable({
+		//helper: "clone",
       connectWith: ".row1Priorities",
       placeholder: "chip chip-placeholder",
       // Added this to prevent crazy cursor grabbing
       cursorAt: {left: 10},
+      create: function(event, ui) {
+			console.log("Sorteds created");      
+      },
       out: function( event, ui ) {
-      	console.log("Chip moved out of list");
+      	//console.log("Chip moved out of list");
       	// Persistent UI data
       	ui.item.data("out", true);
       	},
       over: function( event, ui ) {
-      	console.log("Chip moved in to list");
+      	//console.log("Chip moved in to list");
       	ui.item.data("out", false);
       },
       start: function( event, ui) {
-      	console.log(`At start->height: ${ui.item.innerHeight()} width: ${ui.item.innerWidth()}`);
+      	//console.log(`At start->height: ${ui.item.innerHeight()} width: ${ui.item.innerWidth()}`);
 			// I only want to set this startSize the first time, when the sizes most accurately represent visual reality      	
-      	if (typeof ui.item.data("startSize") == "undefined") {
-      		ui.item.data("startSize", {height: ui.item.innerHeight(), width: ui.item.innerWidth()});
-      	}
+      	//if (typeof ui.item.data("startSize") == "undefined") {
+      	//ui.item.data("startSize", {height: ui.item.innerHeight(), width: ui.item.innerWidth()});
+      	//ui.item.data("thisIsMe", "rightHere");
+      	//ui.item.replaceWith('What does this do?'); // Nothing good
+      	//$(this).replaceWith('What does this do?'); // Destroys the entire sortable
+			//console.dir(ui.helper);      	
+      	//console.log(`id of helper: ${ui.helper.html()}`);
+      	console.log(`text of item: ${ui.item.text()}`);
+      	//console.log(`id of placeholder: ${ui.placeholder.html()}`);
+      	//console.dir(ui.placeholder);
+      	$(ui.item).text("I'm on the move");
+      	$(ui.placeholder).text("I'm not");  
       },
       beforeStop: function( event, ui ) {
       	console.log("Chip released");
       	//var theui = ui
+			/*      	
       	if (ui.item.data("out")) {
       		console.log("Chip was released outside of a list");
       		console.log(`At end->height: ${ui.item.innerHeight()} width: ${ui.item.innerWidth()}`);
@@ -131,6 +145,7 @@ $(function() {
       	} else {
       		console.log("Chip inside of list on release")
       	}
+      	*/
        }
       
     });
@@ -138,6 +153,22 @@ $(function() {
    $( "#archive").droppable({
    	drop: function( event, ui ) {
         console.log("Something was dropped on me");
+			// Hide the item
+			ui.draggable.hide();
+			
+			// Disconnect it from sortable
+			// Don't think it works like that.  I need to add it to the other sortable somehow
+			
+			// Connect it to the archive sortable
+			// see Above
+			
+			// Make the archive icon do something interesting.
+			$("#archive").animate({
+				color: "green"
+			});
+			$("#archive").animate({
+				color: "black"
+			});
       },
       over: function( event, ui ) {
 			$(this).animate({

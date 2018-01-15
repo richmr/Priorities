@@ -75,16 +75,63 @@ function intersectJQOandUI(JQO, UI) {
 $(function() {
 	//$( "#sortable" ).sortable();
 	$('div[id^="priority"]' ).draggable({
-      connectToSortable: ".row1Priorities",
+      //connectToSortable: ".row1Priorities",
+      create: function( event, ui ) {
+			// Store the status of this chip
+			if ($(this).hasClass("chip-status-green")) {
+				$(this).data("status", "chip-status-green");
+			} else if ($(this).hasClass("chip-status-yellow")) {
+				$(this).data("status", "chip-status-yellow");
+			} else {
+				$(this).data("status", "chip-status-red");
+			}
+		},
       helper: "clone",
-      revert: "invalid"
+      revert: "invalid",
+      start: function( event, ui ) {
+			$(this).text(" ");
+			//console.log($(this).prop("style"));
+			$(this).toggleClass($(this).data("status"));
+			$(this).toggleClass("chip-placeholder");
+			$(ui.helper).data("revert", true);
+		},
+		stop: function( event, ui ) {
+			console.log("the drag stopped");
+			if ($(ui.helper).data("revert")) {
+				console.log("I returned home");
+				$(this).toggleClass("chip-placeholder");
+				$(this).toggleClass($(this).data("status"));
+				$(this).text($(ui.helper).text());			
+			} else {
+				$(this).draggable("disable");
+				console.log("I landed somewhere else");			
+			}	
+		}
     });
+    $('div[id^="priority"]' ).droppable({
+      over: function( event, ui ) {
+			//$(this).text("Left behind");
+		},
+		drop: function( event, ui ) {
+			//$(this).text("Left behind");
+			console.log("something dropped on a priority chip");
+			$(ui.helper).data("revert", false);
+			$(this).replaceWith($(ui.helper).clone(true, true));
+			$(this).removeAttr("style");
+			//$(this).css($(ui.helper).css());
+			//$(this).toggleClass("chip-placeholder");
+			//$(this).toggleClass($(ui.helper).data("status"));
+			//$(this).text($(ui.helper).text());
+		}
+    });
+    /*
     $( "#sortable-row1-1, #sortable-row1-2, #sortable-row1-3, #sortable-row1-4" ).sortable({
       connectWith: ".row1Priorities",
       placeholder: "chip chip-placeholder",
       // Added this to prevent crazy cursor grabbing
       cursorAt: {left: 5}
    });
+   */
 	//<ul id="sortable-row1-4" class="row1Priorities">
 	/*$( "#sortable-row1-1, #sortable-row1-2, #sortable-row1-3, #sortable-row1-4" ).sortable({
       connectWith: ".row1Priorities",
@@ -150,7 +197,35 @@ $(function() {
 });
 
 $( "#archive").droppable({
-   	drop: function( event, ui ) {
-        console.log("Something was dropped on me");
-      }
- });   
+	drop: function( event, ui ) {
+     console.log("Something was dropped on me");
+		// Hide the item
+		ui.helper.hide();
+		ui.helper.data("revert", false);
+		
+		// Disconnect it from sortable
+		// Don't think it works like that.  I need to add it to the other sortable somehow
+		
+		// Connect it to the archive sortable
+		// see Above
+		
+		// Make the archive icon do something interesting.
+		$("#archive").animate({
+			color: "green"
+		});
+		$("#archive").animate({
+			color: "black"
+		});
+   },
+   over: function( event, ui ) {
+		$(this).animate({
+			color: "blue"
+		});
+	},
+	out: function( event, ui ) {
+		$(this).animate({
+			color: "black"
+		});
+	},
+	tolerance: "pointer"
+});

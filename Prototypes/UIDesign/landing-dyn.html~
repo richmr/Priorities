@@ -77,7 +77,7 @@
 								<td>Person 1</td>
 								<td>
 									<ul id="sortable-row1-1" class="row1Priorities">
-										<li><div id="priority-chip1" class="chip" style="border:2px solid red">Extreme 1</div></li>
+										<li><div id="priority-chip1" class="chip" >Extreme 1</div></li>
 										<li><div id="priority-chip2" class="chip" style="border:2px solid green">Extreme 2</div></li>
 									</ul>
 								</td>
