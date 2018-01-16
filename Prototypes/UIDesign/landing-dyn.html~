@@ -77,26 +77,26 @@
 								<td>Person 1</td>
 								<td>
 									<ul id="sortable-row1-1" class="row1Priorities">
-										<li><div id="priority-chip1" class="chip" >Extreme 1</div></li>
-										<li><div id="priority-chip2" class="chip" style="border:2px solid green">Extreme 2</div></li>
+										<li><div id="priority-chip1" class="chip chip-status-red" >Extreme 1</div></li>
+										<li><div id="priority-chip2" class="chip chip-status-green" >Extreme 2</div></li>
 									</ul>
 								</td>
 								<td>
 									<ul id="sortable-row1-2" class="row1Priorities">
-										<li><div id="priority-chip3" class="chip" style="border:2px solid green">High 1</div></li>
-										<li><div id="priority-chip4" class="chip" style="border:2px solid yellow">High 2</div></li>
+										<li><div id="priority-chip3" class="chip chip-status-green" >High 1</div></li>
+										<li><div id="priority-chip4" class="chip chip-status-yellow" >High 2</div></li>
 									</ul>
 								</td>
 								<td>
 									<ul id="sortable-row1-3" class="row1Priorities">
-										<li><div id="priority-chip5" class="chip" style="border:2px solid green">Super long project name 1</div></li>
-										<li><div id="priority-chip6" class="chip" style="border:2px solid green">Medium 2</div></li>
+										<li><div id="priority-chip5" class="chip chip-status-green" >Super long project name 1</div></li>
+										<li><div id="priority-chip6" class="chip chip-status-green" >Medium 2</div></li>
 									</ul>
 								</td>
 								<td>
 									<ul id="sortable-row1-4" class="row1Priorities">
-										<li><div id="priority-chip" class="chip" style="border:2px solid green">Extreme 1</div></li>
-										<li><div class="chip" style="border:2px dashed gray">Drop a project here!</div></li>
+										<li><div id="priority-chip" class="chip chip-status-green">Extreme 1</div></li>
+										<li><div class="chip chip-placeholder" > </div></li>
 									</ul>
 								</td>
 							</tr>
