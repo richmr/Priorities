@@ -1,4 +1,4 @@
-console.log("Dynamic chips activated.");
+console.log("Dynamic chips v4 activated.");
 
 // Establish the data.
 var priorityChips = { "priority-chip1": { "projectID":"1"},
@@ -21,79 +21,34 @@ var projects = { "0": {"title":" ", "status":"chip-placeholder", "draggable":fal
 						"7": {"title":"Low 1", "status":"chip-status-red", "draggable":true, "droppable":false}
 					};
 
-console.log(projects["1"]);
-						
-								
-
-$( function() {
-    $( "#draggable" ).draggable();
-  } );
-  
-
-function intersectRect(r1, r2) {
-  return !(r2.left > r1.right || 
-           r2.right < r1.left || 
-           r2.top > r1.bottom ||
-           r2.bottom < r1.top);
-}
-
-function intersectUI(ui1, ui2) {
-	// This code ended up not being used for the purposes of drop detection
-	// because a raw jQuery object (the Archive icon) and a "UI" as delivered by
-	// the sortable calls have different data structures.
-	var rect1 = {
-		left: ui1.offset().left,
-		top: ui1.offset().top,
-		right: ui1.offset().left+ui1.outerWidth(),
-		bottom: ui1.offset().top+ui1.outerHeight()
+function updatePriorityChip( chip ) {
+	// This will update the chip with the most recent data
+	// I assume all chips have been marked as draggable and droppable already
+	
+	var projID = priorityChips[$(chip).attr("id")].projectID;
+	var thisProj = projects[projID];
+	
+	// Remove all current classes
+	$(chip).removeClass("chip-placeholder chip-status-red chip-status-green chip-status-yellow");
+	
+	// Add the requisite class
+	$(chip).addClass(thisProj.status);
+	
+	// Set the title
+	$(chip).text(thisProj.title);
+	
+	// Set attributes
+	if (thisProj.draggable) {
+		$(chip).draggable("enable");
+	} else {
+		$(chip).draggable("disable");
 	}
 	
-	
-		
-	var rect2 = {
-		left: ui2.offset().left,
-		top: ui2.offset().top,
-		right: ui2.offset().left+ui1.outerWidth(),
-		bottom: ui2.offset().top+ui1.outerHeight()
+	if (thisProj.droppable) {
+		$(chip).droppable("enable");
+	} else {
+		$(chip).droppable("disable");
 	}
-	
-
-	$("#rect1").offset(rect1);
-	$("#rect1").height(rect1.top-rect1.bottom);
-	$("#rect1").width(rect1.left-rect1.right);
-	$("#rect2").offset(rect2);
-	$("#rect2").height(rect2.top-rect2.bottom);
-	$("#rect2").width(rect2.left-rect2.right);
-	
-	
-	return intersectRect(rect1, rect2);
-	
-}
-
-function intersectJQOandUI(JQO, UI) {
-	var rect1 = {
-		left: JQO.offset().left,
-		top: JQO.offset().top,
-		right: JQO.offset().left+JQO.innerWidth(),
-		bottom: JQO.offset().top+JQO.innerHeight()
-	}
-		
-	var rect2 = {
-		left: UI.offset.left,
-		top: UI.offset.top,
-		right: UI.offset.left+UI.item.data().startSize.width/2,  
-		bottom: UI.offset.top+UI.item.data().startSize.height
-	}
-	
-	// This code moves the visual indicators around for debugging purposes.
-	$("#rect1").offset(rect1);
-	$("#rect1").height(JQO.innerHeight());
-	$("#rect1").width(JQO.innerWidth());
-	$("#rect2").offset(rect2);
-	$("#rect2").height(UI.item.data().startSize.height);
-	$("#rect2").width(UI.item.data().startSize.width/2);
-	
-	return intersectRect(rect1, rect2);
 	
 }
 
@@ -101,35 +56,38 @@ $(function() {
 	//$( "#sortable" ).sortable();
 	$('div[id^="priority"]' ).draggable({
       //connectToSortable: ".row1Priorities",
+		/*      
       create: function( event, ui ) {
-			// Store the status of this chip
-			if ($(this).hasClass("chip-status-green")) {
-				$(this).data("status", "chip-status-green");
-			} else if ($(this).hasClass("chip-status-yellow")) {
-				$(this).data("status", "chip-status-yellow");
-			} else {
-				$(this).data("status", "chip-status-red");
-			}
+      	updatePriorityChip(this);
 		},
+		*/
+		disabled: true,
       helper: "clone",
       revert: "invalid",
       start: function( event, ui ) {
+      	// Store original project number in two places
+      	$(this).data("originalProjNum", priorityChips[$(this).attr("id")].projectID);
+      	$(ui.helper).data("originalProjNum", priorityChips[$(this).attr("id")].projectID);
+      	// Set projectID = 0
+      	priorityChips[$(this).attr("id")].projectID = "0"
+      	// Reset format
+      	$(this).removeClass("chip-status-red chip-status-green chip-status-yellow");
 			$(this).text(" ");
-			//console.log($(this).prop("style"));
-			$(this).toggleClass($(this).data("status"));
-			$(this).toggleClass("chip-placeholder");
+			$(this).addClass("chip-placeholder");
+			// Set revert flag to make sure we know where it goes
 			$(ui.helper).data("revert", true);
 		},
 		stop: function( event, ui ) {
 			console.log("the drag stopped");
 			if ($(ui.helper).data("revert")) {
 				console.log("I returned home");
-				$(this).toggleClass("chip-placeholder");
-				$(this).toggleClass($(this).data("status"));
-				$(this).text($(ui.helper).text());			
+				// Reset the project number
+				priorityChips[$(this).attr("id")].projectID = $(this).data("originalProjNum");
+				// Reset the chip
+				updatePriorityChip(this);
 			} else {
-				$(this).draggable("disable");
-				console.log("I landed somewhere else");			
+				console.log("I landed somewhere else");
+				updatePriorityChip(this);	
 			}	
 		}
     });
@@ -140,88 +98,25 @@ $(function() {
 		drop: function( event, ui ) {
 			//$(this).text("Left behind");
 			console.log("something dropped on a priority chip");
+			
+			// Tag the helper to make sure it knows it landed somewhere else
 			$(ui.helper).data("revert", false);
-			var copyOfChip = $(ui.helper).clone(true, true);
-			copyOfChip.removeAttr("style");
-			$(this).replaceWith(copyOfChip);
-			//$(this).removeAttr("style");
-			//$(this).css($(ui.helper).css());
-			//$(this).toggleClass("chip-placeholder");
-			//$(this).toggleClass($(ui.helper).data("status"));
-			//$(this).text($(ui.helper).text());
+
+			// Set this droppable to the new project number
+			priorityChips[$(this).attr("id")].projectID = $(ui.helper).data("originalProjNum");
+			
+			// Update the chip
+			updatePriorityChip(this);
 		}
     });
-    /*
-    $( "#sortable-row1-1, #sortable-row1-2, #sortable-row1-3, #sortable-row1-4" ).sortable({
-      connectWith: ".row1Priorities",
-      placeholder: "chip chip-placeholder",
-      // Added this to prevent crazy cursor grabbing
-      cursorAt: {left: 5}
-   });
-   */
-	//<ul id="sortable-row1-4" class="row1Priorities">
-	/*$( "#sortable-row1-1, #sortable-row1-2, #sortable-row1-3, #sortable-row1-4" ).sortable({
-      connectWith: ".row1Priorities",
-      placeholder: "chip chip-placeholder",
-      // Added this to prevent crazy cursor grabbing
-      cursorAt: {left: 5},
-      out: function( event, ui ) {
-      	console.log("Chip moved out of list.  Making it draggable");
-      	// Make it a draggable, but still connected
-      	ui.item.draggable({
-      		connectToSortable: ".row1Priorities",
-      		helper: "clone",
-      		revert: "invalid"
-    		});
-      },
-      over: function( event, ui ) {
-      	console.log("Chip moved in to list");
-      	ui.item.data("out", false);
-      },
-      start: function( event, ui) {
-      	console.log(`At start->height: ${ui.item.innerHeight()} width: ${ui.item.innerWidth()}`);
-			// I only want to set this startSize the first time, when the sizes most accurately represent visual reality      	
-      	if (typeof ui.item.data("startSize") == "undefined") {
-      		ui.item.data("startSize", {height: ui.item.innerHeight(), width: ui.item.innerWidth()});
-      	}
-      },
-      beforeStop: function( event, ui ) {
-      	console.log("Chip released");
-      	//var theui = ui
-      	if (ui.item.data("out")) {
-      		console.log("Chip was released outside of a list");
-      		console.log(`At end->height: ${ui.item.innerHeight()} width: ${ui.item.innerWidth()}`);
-      		console.log(`Dropped chip offset: ${ui.offset.top}, ${ui.offset.left}`);
-				var archiveOffset = $("#archive").offset()    		
-      		console.log(`Location of archive: ${archiveOffset.top}, ${archiveOffset.left}`);
-      		var intersect = intersectJQOandUI($("#archive"), ui);
-      		if (intersect) {
-      			console.log("The items are touching");
-      			// Hide the item
-      			ui.item.hide();
-      			
-      			// Disconnect it from sortable
-      			// Don't think it works like that.  I need to add it to the other sortable somehow
-      			
-      			// Connect it to the archive sortable
-      			// see Above
-      			
-      			// Make the archive icon do something interesting.
-      			$("#archive").animate({
-      				color: "green"
-      			});
-      			$("#archive").animate({
-      				color: "black"
-      			});
-      		} else {
-      			console.log("They aren't touching");
-      		}
-      	} else {
-      		console.log("Chip inside of list on release")
-      	}
-       }
-      */
+    // Now establish the actual chip values
+	$('div[id^="priority"]' ).each(function( index ) {
+		console.log("Setting up a chip");
+	  	updatePriorityChip(this);
+	});
 });
+
+
 
 $( "#archive").droppable({
 	drop: function( event, ui ) {
