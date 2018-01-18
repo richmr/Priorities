@@ -31,3 +31,8 @@
 	height: 20px;
 	border: 1px solid black;
 }
+
+.action-icons {
+	font-size: 3rem;
+	color: black;
+}
