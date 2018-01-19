@@ -3,36 +3,39 @@
 console.log("Dynamic chips v4 activated.");
 
 // Establish the data.
-var priorityChips = { "priority-chip1": { "projectID":"1"},
-								"priority-chip2": { "projectID":"2"},
-								"priority-chip3": { "projectID":"3"},
-								"priority-chip4": { "projectID":"4"},
-								"priority-chip5": { "projectID":"5"},
-								"priority-chip6": { "projectID":"6"},
-								"priority-chip7": { "projectID":"7"},
-								"priority-chip8": { "projectID":"0"}
+var priorityChips = { "priority-chip1": { "projectID":"1", "blank":"0"},
+								"priority-chip2": { "projectID":"2", "blank":"0"},
+								"priority-chip3": { "projectID":"3", "blank":"0"},
+								"priority-chip4": { "projectID":"4", "blank":"0"},
+								"priority-chip5": { "projectID":"5", "blank":"0"},
+								"priority-chip6": { "projectID":"6", "blank":"0"},
+								"priority-chip7": { "projectID":"7", "blank":"0"},
+								"priority-chip8": { "projectID":"0", "blank":"0"},
+								"priority-chipStage" : {"projectID":"stage", "blank":"stage"}
 							};
-var archivedProjects = {
-									"archive-chip1": {"projectID": "8"}
-								};
+var archivedProjects = ["15", "20"];
 
 								
-var projects = { "0": {"title":" ", "status":"chip-placeholder", "draggable":false, "droppable":true},
-						"1": {"title":"Extreme 1", "status":"chip-status-red", "draggable":true, "droppable":false},
-						"2": {"title":"Extreme 2", "status":"chip-status-green", "draggable":true, "droppable":false},
-						"3": {"title":"High 1", "status":"chip-status-yellow", "draggable":true, "droppable":false},
-						"4": {"title":"High 2", "status":"chip-status-green", "draggable":true, "droppable":false},
-						"5": {"title":"Medium 1", "status":"chip-status-green", "draggable":true, "droppable":false},
-						"6": {"title":"Really Long Medium 2", "status":"chip-status-red", "draggable":true, "droppable":false},
-						"7": {"title":"Low 1", "status":"chip-status-red", "draggable":true, "droppable":false},
-						"8": {"title":"Stored 1", "status":"chip-status-red", "draggable":true, "droppable":false
+var projects = { "0": {"title":" ", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"none"},
+						"1": {"title":"Extreme 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"2": {"title":"Extreme 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
+						"3": {"title":"High 1", "status":"chip-status-yellow", "draggable":true, "droppable":false, "click":"details"},
+						"4": {"title":"High 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
+						"5": {"title":"Medium 1", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
+						"6": {"title":"Really Long Medium 2", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"7": {"title":"Low 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"8": {"title":"Stored 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"15": {"title":"Archived 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"20": {"title":"Archived Too", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"}
 					};
 
 function updatePriorityChip( chip ) {
 	// This will update the chip with the most recent data
 	// I assume all chips have been marked as draggable and droppable already
 	
-	var projID = priorityChips[$(chip).attr("id")].projectID;
+	var projID = priorityChips[chip.id].projectID;
+	//$(chip).attr("id")].projectID;
 	var thisProj = projects[projID];
 	
 	// Remove all current classes
@@ -57,17 +60,27 @@ function updatePriorityChip( chip ) {
 		$(chip).droppable("disable");
 	}
 	
+	if (thisProj.click == "details") {
+		$(chip).unbind("click");
+		$(chip).click(function(event) {
+			clickChip( event.target );		
+		});
+	} else if (thisProj.click == "add") {
+		$(chip).unbind("click");
+		$(chip).click(function(event) {
+			clickChip( event.target );		
+		});
+	} else if (thisProj.click == "none") {
+		$(chip).unbind("click");
+	}
+}
+
+function clickChip( chip ) {
+	console.log(`id: ${chip.id} clicked`);
 }
 
 $(function() {
-	//$( "#sortable" ).sortable();
 	$('div[id^="priority"]' ).draggable({
-      //connectToSortable: ".row1Priorities",
-		/*      
-      create: function( event, ui ) {
-      	updatePriorityChip(this);
-		},
-		*/
 		disabled: true,
       helper: "clone",
       revert: "invalid",
@@ -76,9 +89,9 @@ $(function() {
       	$(this).data("originalProjNum", priorityChips[$(this).attr("id")].projectID);
       	$(ui.helper).data("originalProjNum", priorityChips[$(this).attr("id")].projectID);
       	// Set projectID = 0
-      	priorityChips[$(this).attr("id")].projectID = "0"
+      	priorityChips[$(this).attr("id")].projectID = priorityChips[$(this).attr("id")].blank;
       	// Reset format
-      	$(this).removeClass("chip-status-red chip-status-green chip-status-yellow");
+      	$(this).removeClass("chip-black chip-status-red chip-status-green chip-status-yellow");
 			$(this).text(" ");
 			$(this).addClass("chip-placeholder");
 			// Set revert flag to make sure we know where it goes
@@ -127,16 +140,14 @@ $(function() {
 
 $( "#archive").droppable({
 	drop: function( event, ui ) {
-     console.log("Something was dropped on me");
+     console.log("Something was dropped on the archive");
 		// Hide the item
 		ui.helper.hide();
 		ui.helper.data("revert", false);
-		
-		// Disconnect it from sortable
-		// Don't think it works like that.  I need to add it to the other sortable somehow
-		
+				
 		// Connect it to the archive sortable
-		// see Above
+		var projID = $(ui.helper).data("originalProjNum");
+		addChipToArchive(projID);
 		
 		// Make the archive icon do something interesting.
 		$("#archive").animate({
@@ -159,7 +170,66 @@ $( "#archive").droppable({
 	tolerance: "pointer"
 });
 
+function initializeArchive() {
+	// Loop over the archivedProjects array
+	archivedProjects.forEach(function (item, index, array) {
+		addChipToArchive(item);
+	});
+}	
+
+
+function addChipToArchive( projectID ) {	
+	// Returns TRUE when the function completes correctly	
+	// Add project to archivedProjects - Maybe not, maybe just store in the html
+	
+	// Prepend html to archivePool
+	var title = projects[projectID].title;
+	var newID = "archivePool-" + ($('div[id^="archivePool-"]').length + 1);
+	
+	// Reset the chip status to green.  If you put a project in idle, then no fault for not working on it
+	projects[projectID].status = "chip-status-green"
+	
+	var htmlSnippet = `<div id="${newID}" class="chip">${title}</div>`;
+	$("#archivePool").prepend(htmlSnippet);
+	
+	// Set info for this chip
+	$("#"+newID).data("projectID", projectID);
+	
+	// Set action attributes
+	$("#"+newID).click(function (event) {
+		clickOnArchivedChip(event.target);
+	});
+	
+	// return true 
+	return true;
+}
+
+function clickOnArchivedChip ( chipDOM ) {
+	// Set up chipStage
+	var projID = $(chipDOM).data("projectID");
+	priorityChips["priority-chipStage"].projectID = projID;
+	updatePriorityChip($("#priority-chipStage")[0]);
+	// Remove this from archivedProjects
+	// not necessary, this is only saved on exit
+	
+	// Get the position of the staging chip
+	var stageoffset = $("#priority-chipStage").offset();
+	stageoffset["position"]="absolute";
+	// Send the chip there?
+	$(chipDOM).animate({marginRight: +400} ,2000, function() {$(chipDOM).remove(); $("#archiveModal").modal('close');});
+	
+	// Remove html from archivePool
+	
+	
+	// Close the modal
+	//$("#archiveModal").modal('close');
+	
+	//$("#priority-chipStage").toggleClass("pulse");
+		
+}
+
 $(document).ready(function(){
     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
+    initializeArchive();
   });
