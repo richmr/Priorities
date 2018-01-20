@@ -204,22 +204,41 @@ function addChipToArchive( projectID ) {
 	return true;
 }
 
+function clickOnArchive () {
+	// Check to see if a chip is already sitting on the stage
+	// If so, rearchive it.
+	var projID = priorityChips["priority-chipStage"].projectID;
+	if (projID != "stage") {
+		addChipToArchive(projID);
+		priorityChips["priority-chipStage"].projectID = "stage";
+		updatePriorityChip($("#priority-chipStage")[0]);
+	}
+	// Open the modal
+	$("#archiveModal").modal('open');
+}
+
 function clickOnArchivedChip ( chipDOM ) {
 	// Set up chipStage
 	var projID = $(chipDOM).data("projectID");
 	priorityChips["priority-chipStage"].projectID = projID;
-	updatePriorityChip($("#priority-chipStage")[0]);
 	// Remove this from archivedProjects
 	// not necessary, this is only saved on exit
 	
 	// Get the position of the staging chip
-	var stageoffset = $("#priority-chipStage").offset();
-	stageoffset["position"]="absolute";
+	//var stageoffset = $("#priority-chipStage").offset();
+	//stageoffset["position"]="absolute";
+	// Get the position of the top right corner of the modal
+	var topright = $("#archiveModal-content").position();
+	topright.left = topright.left + $("#archiveModal-content").width() - $(chipDOM).width() - $(chipDOM).position().left;
+	topright.top = topright.top - $(chipDOM).position().top;
+	
 	// Send the chip there?
-	$(chipDOM).animate({marginRight: +400} ,2000, function() {$(chipDOM).remove(); $("#archiveModal").modal('close');});
+	$(chipDOM).draggable();
+	$(chipDOM).animate(topright ,250, "linear", function() { $(chipDOM).remove(); updatePriorityChip($("#priority-chipStage")[0]);
+	$("#archiveModal").modal('close');});
 	
 	// Remove html from archivePool
-	
+	//$(chipDOM).remove();
 	
 	// Close the modal
 	//$("#archiveModal").modal('close');
@@ -230,6 +249,9 @@ function clickOnArchivedChip ( chipDOM ) {
 
 $(document).ready(function(){
     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
-    $('.modal').modal();
+	$('.modal').modal();    
+    $("#archive").click(function(event) {
+			clickOnArchive();		
+		});
     initializeArchive();
   });
