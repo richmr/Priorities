@@ -228,7 +228,7 @@ function clickOnArchivedChip ( chipDOM ) {
 	//var stageoffset = $("#priority-chipStage").offset();
 	//stageoffset["position"]="absolute";
 	// Get the position of the top right corner of the modal
-	var topright = $("#archiveModal-content").position();
+	var topright = $("#archiveModal-header").position();
 	topright.left = topright.left + $("#archiveModal-content").width() - $(chipDOM).width() - $(chipDOM).position().left;
 	topright.top = topright.top - $(chipDOM).position().top;
 	

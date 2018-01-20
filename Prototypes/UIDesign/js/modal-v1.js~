@@ -230,7 +230,7 @@ function clickOnArchivedChip ( chipDOM ) {
 	// Get the position of the top right corner of the modal
 	var topright = $("#archiveModal-content").position();
 	topright.left = topright.left + $("#archiveModal-content").width() - $(chipDOM).width() - $(chipDOM).position().left;
-	topright.top = topright.top - $(chipDOM).position().top;
+	topright.top = $("#priority-chipStage").offset() - $(chipDOM).position().top;
 	
 	// Send the chip there?
 	$(chipDOM).draggable();
@@ -249,6 +249,7 @@ function clickOnArchivedChip ( chipDOM ) {
 
 $(document).ready(function(){
     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+	$('.modal').modal();    
     $("#archive").click(function(event) {
 			clickOnArchive();		
 		});
