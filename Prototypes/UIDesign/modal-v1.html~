@@ -134,7 +134,7 @@
 			<!-- Archive Modal Definition -->
 			<div id="archiveModal" class="modal">
 				<div id="archiveModal-content" class="modal-content">
-			      <h5>Click a project to return it to Priorities Table</h5>
+			      <span id="archiveModal-header"><h5>Click a project to return it to Priorities Table</h5></span>
 			      <div id="archivePool">
 			      <!-- Chips added here  -->
 			      </div>     
@@ -147,8 +147,12 @@
 							
 			
 		</div>
-	<script type="text/javascript" src="js/modal-v1.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/priorityTable.js"></script>
+	<script type="text/javascript" src="js/archive.js"></script>
+	<script type="text/javascript" src="js/testdata.js"></script>
+	<script type="text/javascript" src="js/prioritiesStartup.js"></script>
+	
 	<!-- </div> -->
 </body>
 </html>
