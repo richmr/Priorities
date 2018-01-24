@@ -30,6 +30,10 @@ $( "#archive").droppable({
 	tolerance: "pointer"
 });
 
+$("#archive").click(function(event) {
+		clickOnArchive();		
+	});
+
 function initializeArchive() {
 	// Loop over the archivedProjects array
 	archivedProjects.forEach(function (item, index, array) {
@@ -44,7 +48,8 @@ function addChipToArchive( projectID ) {
 	
 	// Prepend html to archivePool
 	var title = projects[projectID].title;
-	var newID = "archivePool-" + ($('div[id^="archivePool-"]').length + 1);
+	var newCount = ($('div[id^="archivePool-"]').length + 1);
+	var newID = "archivePool-" + newCount;
 	
 	// Reset the chip status to green.  If you put a project in idle, then no fault for not working on it
 	projects[projectID].status = "chip-status-green"
@@ -59,6 +64,11 @@ function addChipToArchive( projectID ) {
 	$("#"+newID).click(function (event) {
 		clickOnArchivedChip(event.target);
 	});
+	
+	$("#"+newID).disableSelection();
+	
+	// Set the count text
+	$("#archive-count").text(newCount+ " idle projects");
 	
 	// return true 
 	return true;
@@ -97,12 +107,12 @@ function clickOnArchivedChip ( chipDOM ) {
 	$(chipDOM).animate(topright ,250, "linear", function() { $(chipDOM).remove(); updatePriorityChip($("#priority-chipStage")[0]);
 	$("#archiveModal").modal('close');});
 	
-	// Remove html from archivePool
-	//$(chipDOM).remove();
+	// Reset the counter
+	var newCount = ($('div[id^="archivePool-"]').length-1);
+	// Set the count text
+	$("#archive-count").text(newCount+ " idle projects");
 	
-	// Close the modal
-	//$("#archiveModal").modal('close');
-	
-	//$("#priority-chipStage").toggleClass("pulse");
 		
 }
+
+console.log("archive loaded");

@@ -10,6 +10,8 @@ var priorityChips = { "priority-chip1": { "projectID":"1", "blank":"0"},
 								"priority-chipStage" : {"projectID":"stage", "blank":"stage"}
 							};
 var archivedProjects = ["15", "20"];
+var doneProjects = [];
+var graveyardProjects = [];
 
 								
 var projects = { "0": {"title":" ", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"none"},

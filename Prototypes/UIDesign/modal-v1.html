@@ -125,10 +125,19 @@
 				<a class="waves-effect" href="#!">
 					<i id="archive" class="small material-icons action-icons" style="font-size: 3rem; color: black;">archive</i>
 				</a>
-				<!-- <span class="new badge" data-badge-caption="idle projects">4</span> -->
+				<span id="archive-count">0</span> idle projects
+				<!-- <span class="new badge badge-left" data-badge-caption="idle projects">4</span> -->
 				<br><br>
-				<i id="draggable" class="small material-icons action-icons" style="font-size: 3rem; color: black;">sentiment_very_satisfied</i><br><br>
-				<i class="small material-icons action-icons" style="font-size: 3rem; color: black;" >delete_forever</i><br><br>
+				<a class="waves-effect" href="#!">
+					<i id="doneProjects" class="small material-icons action-icons" style="font-size: 3rem; color: black;">sentiment_very_satisfied</i>
+				</a>
+				<span id="doneProjects-count">0</span> done projects
+				<br><br>
+				<a class="waves-effect" href="#!">
+					<i id="graveyard" class="small material-icons action-icons" style="font-size: 3rem; color: black;" >delete_forever</i>
+				</a>
+				<span id="graveyard-count">0</span> discarded projects
+				<br><br>
 			</div>
 			
 			<!-- Archive Modal Definition -->
@@ -144,12 +153,38 @@
 			    </div>
 		    </div>
 		
-							
+			<!-- doneProjects Modal Definition -->
+			<div id="doneProjectsModal" class="modal">
+				<div id="doneProjectsModal-content" class="modal-content">
+			      <span id="doneProjectsModal-header"><h5>Double click a project to return it to Priorities Table</h5></span>
+			      <div id="doneProjectsPool">
+			      <!-- Chips added here  -->
+			      </div>     
+			    </div>
+			    <div class="modal-footer">
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		    
+		    <!-- graveyard Modal Definition -->
+			<div id="graveyardModal" class="modal">
+				<div id="graveyardModal-content" class="modal-content">
+			      <span id="graveyardModal-header"><h5>Double click a project to return it to Priorities Table</h5></span>
+			      <div id="graveyardPool">
+			      <!-- Chips added here  -->
+			      </div>     
+			    </div>
+			    <div class="modal-footer">
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>					
 			
 		</div>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/priorityTable.js"></script>
 	<script type="text/javascript" src="js/archive.js"></script>
+	<script type="text/javascript" src="js/doneProjects.js"></script>
+	<script type="text/javascript" src="js/graveyard.js"></script>
 	<script type="text/javascript" src="js/testdata.js"></script>
 	<script type="text/javascript" src="js/prioritiesStartup.js"></script>	
 	<!-- </div> -->

@@ -1,19 +1,19 @@
-$( "#archive").droppable({
+$( "#doneProjects").droppable({
 	drop: function( event, ui ) {
-     console.log("Something was dropped on the archive");
+     console.log("Something was dropped on the doneProjects");
 		// Hide the item
 		ui.helper.hide();
 		ui.helper.data("revert", false);
 				
 		// Connect it to the archive sortable
 		var projID = $(ui.helper).data("originalProjNum");
-		addChipToArchive(projID);
+		addChipTodoneProjects(projID);
 		
 		// Make the archive icon do something interesting.
-		$("#archive").animate({
+		$("#doneProjects").animate({
 			color: "green"
 		});
-		$("#archive").animate({
+		$("#doneProjects").animate({
 			color: "black"
 		});
    },
@@ -30,51 +30,51 @@ $( "#archive").droppable({
 	tolerance: "pointer"
 });
 
-$("#archive").click(function(event) {
-		clickOnArchive();		
+$("#doneProjects").click(function(event) {
+		clickOndoneProjects();		
 	});
 
-function initializeArchive() {
+function initializedoneProjects() {
 	// Loop over the archivedProjects array
-	archivedProjects.forEach(function (item, index, array) {
-		addChipToArchive(item);
+	doneProjects.forEach(function (item, index, array) {
+		addChipTodoneProjects(item);
 	});
 }	
 
 
-function addChipToArchive( projectID ) {	
+function addChipTodoneProjects( projectID ) {	
 	// Returns TRUE when the function completes correctly	
 	// Add project to archivedProjects - Maybe not, maybe just store in the html
 	
 	// Prepend html to archivePool
 	var title = projects[projectID].title;
-	var newCount = ($('div[id^="archivePool-"]').length + 1);
-	var newID = "archivePool-" + newCount;
+	var newCount = ($('div[id^="doneProjectsPool-"]').length + 1);
+	var newID = "doneProjectsPool-" + newCount;
 	
 	// Reset the chip status to green.  If you put a project in idle, then no fault for not working on it
 	projects[projectID].status = "chip-status-green"
 	
 	var htmlSnippet = `<div id="${newID}" class="chip">${title}</div>`;
-	$("#archivePool").prepend(htmlSnippet);
+	$("#doneProjectsPool").prepend(htmlSnippet);
 	
 	// Set info for this chip
 	$("#"+newID).data("projectID", projectID);
 	
 	// Set action attributes
-	$("#"+newID).click(function (event) {
-		clickOnArchivedChip(event.target);
+	$("#"+newID).dblclick(function (event) {
+		clickOndoneProjectsChip(event.target);
 	});
 	
 	$("#"+newID).disableSelection();
 	
 	// Set the count text
-	$("#archive-count").text(newCount);
+	$("#doneProjects-count").text(newCount);
 	
 	// return true 
 	return true;
 }
 
-function clickOnArchive () {
+function clickOndoneProjects () {
 	// Check to see if a chip is already sitting on the stage
 	// If so, rearchive it.
 	var projID = priorityChips["priority-chipStage"].projectID;
@@ -84,10 +84,10 @@ function clickOnArchive () {
 		updatePriorityChip($("#priority-chipStage")[0]);
 	}
 	// Open the modal
-	$("#archiveModal").modal('open');
+	$("#doneProjectsModal").modal('open');
 }
 
-function clickOnArchivedChip ( chipDOM ) {
+function clickOndoneProjectsChip ( chipDOM ) {
 	// Set up chipStage
 	var projID = $(chipDOM).data("projectID");
 	priorityChips["priority-chipStage"].projectID = projID;
@@ -98,20 +98,23 @@ function clickOnArchivedChip ( chipDOM ) {
 	//var stageoffset = $("#priority-chipStage").offset();
 	//stageoffset["position"]="absolute";
 	// Get the position of the top right corner of the modal
-	var topright = $("#archiveModal-header").position();
-	topright.left = topright.left + $("#archiveModal-content").width() - $(chipDOM).width() - $(chipDOM).position().left;
+	var topright = $("#doneProjectsModal-header").position();
+	topright.left = topright.left + $("#doneProjectsModal-content").width() - $(chipDOM).width() - $(chipDOM).position().left;
 	topright.top = topright.top - $(chipDOM).position().top;
 	
 	// Send the chip there?
 	$(chipDOM).draggable();
-	$(chipDOM).animate(topright ,250, "linear", function() { $(chipDOM).remove(); updatePriorityChip($("#priority-chipStage")[0]);
-	$("#archiveModal").modal('close');});
+	$(chipDOM).animate(topright ,250, "linear", function() { 
+		$(chipDOM).remove();
+		updatePriorityChip($("#priority-chipStage")[0]);
+		$("#doneProjectsModal").modal('close');
+	});
 	
 	// Reset the counter
-	var newCount = ($('div[id^="archivePool-"]').length-1);
+	var newCount = ($('div[id^="doneProjectsPool-"]').length-1);
 	// Set the count text
-	$("#archive-count").text(newCount);
-		
+	$("#doneProjects-count").text(newCount);
+			
 }
 
-console.log("archive loaded");
+console.log("doneProjects loaded");

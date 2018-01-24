@@ -25,3 +25,5 @@ var projects = { "0": {"title":" ", "status":"chip-placeholder", "draggable":fal
 						"20": {"title":"Archived Too", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
 						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"}
 					};
+
+console.log("Test data loaded.");

@@ -23,6 +23,10 @@
 	border: 2px solid yellow;
 }
 
+.chip-black {
+	border: 2px solid black;
+}
+
 .rect {
 	position: fixed;
 	top: 0;

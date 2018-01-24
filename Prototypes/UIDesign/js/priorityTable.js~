@@ -102,6 +102,6 @@ function initializePriorityTable() {
 		console.log("Setting up a chip");
 	  	updatePriorityChip(this);
 	});
-});
+}
 
 console.log("PriorityTable loaded");
