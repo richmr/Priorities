@@ -1,9 +1,12 @@
 // Collection of test functions for "getting data"
 
 function getPeople_test() {
-	var names = {"celestine@example.com":{"nickname":"Celestine"},
-				"jaymes@example.com":{"nickname":"Jaymes"},
-				"jillie@example.com":{"nickname":"Jill"}
+	var names = {"1":{"email":"celestine@example.com",
+							"nickname":"Celestine"},
+					"2":{"email":"jaymes@example.com",
+							"nickname":"Jaymes"},
+					"3":{"email":"jillie@example.com",
+							"nickname":"Jill"}
 			};
 	return names;
 }

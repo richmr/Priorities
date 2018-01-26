@@ -8,7 +8,7 @@ function getPeople_test() {
 	return names;
 }
 
-function getPriorityTableChips_test() {
+function getPriorityTableProjects_test() {
 	var chips = { "priority-chip1": { "projectID":"1", "blank":"0"},
 								"priority-chip2": { "projectID":"2", "blank":"0"},
 								"priority-chip3": { "projectID":"3", "blank":"0"},
@@ -27,7 +27,7 @@ function getArchivedProjects_test() {
 	return projs;
 } 
 
-function getPriorityTableProjects_test() {
+function getProjectBasics_test() {
 	var projs = { "0": {"title":" ", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"none"},
 						"1": {"title":"Extreme 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
 						"2": {"title":"Extreme 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
