@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="css/dynamic-chips.css"/>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	 
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<meta charset="utf-8" />
+<title>Priorities Landing page</title>
+</head>
+<body>
+	<!-- <div class="container"> -->
+		<!-- Everything should be in a single row.. -->
+		<div class="row">
+			<!-- Main page area -->
+			<!-- Left bar area/spacer -->
+			<div class="col s1">
+			</div>
+			<!-- Top action bar over the main table -->
+			<div class="col s9">
+				<br><br>
+				<div class="col s2 valign-wrapper">
+					<i class="small material-icons">undo</i>
+					<i class="small material-icons">redo</i>		
+				</div>
+				<div class="col s3 offset-s2 valign-wrapper">
+					Portfolio Title  <i class="small material-icons">arrow_drop_down</i>
+				</div>
+				<div class="col s2 offset-s3 valign-wrapper">
+					<i class="small material-icons" style="padding-right:5px">share</i>
+					<i class="small material-icons">list</i>
+				</div>
+				<!-- Priorities table should start here -->
+					<br>
+					<table class="striped">
+						<thead>
+							<tr>
+								<th> </th>
+								<th>Extreme</th>
+								<th>High   </th>
+								<th>Medium </th>
+								<th>Low    </th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- <tr>
+								<td>Person 1</td>
+								<td>
+									<a class="btn">Long title 1</a>
+									<br>
+									<a class="btn">Short 1     </a>
+								</td>
+								<td>
+									<a class="btn">Long title 1</a>
+									<br>
+									<a class="btn">Long title 2</a>
+								</td>
+								<td>
+									<a class="btn">Short       </a>
+									<br>
+									<a class="btn">Short       </a>
+								</td>
+								<td>
+									<a class="btn">in between  </a>
+									<br>
+									<a class="btn">in between  </a>
+								</td>
+							</tr> -->
+							<tr>
+								<td>Person 1</td>
+								<td>
+									<ul id="sortable-row1-1" class="row1Priorities">
+										<li><div id="priority-chip1" class="chip" ></div></li>
+										<li><div id="priority-chip2" class="chip" ></div></li>
+									</ul>
+								</td>
+								<td>
+									<ul id="sortable-row1-2" class="row1Priorities">
+										<li><div id="priority-chip3" class="chip" ></div></li>
+										<li><div id="priority-chip4" class="chip" ></div></li>
+									</ul>
+								</td>
+								<td>
+									<ul id="sortable-row1-3" class="row1Priorities">
+										<li><div id="priority-chip5" class="chip" ></div></li>
+										<li><div id="priority-chip6" class="chip" ></div></li>
+									</ul>
+								</td>
+								<td>
+									<ul id="sortable-row1-4" class="row1Priorities">
+										<li><div id="priority-chip7" class="chip" ></div></li>
+										<li><div id="priority-chip8" class="chip" ></div></li>
+									</ul>
+								</td>
+							</tr>
+							
+							<!-- End of table content, "Add Row" next -->
+							<tr>
+								<td>
+									<i class="small material-icons" style="font-size: 2rem">add_circle_outline</i>
+								</td>
+							</tr>
+						</tbody>					
+					</table>
+					
+									
+			</div>
+			<!-- Test Divs, to show drop and intersecting rectangles -->
+			<div id="rect1" class="rect"></div>
+			<div id="rect2" class="rect" style="top:30;"></div>			
+			
+			
+			<!-- Side menu -->
+			<div class="col s2">
+				<br>
+				<div class="valign-wrapper">Username <i class="small material-icons">arrow_drop_down</i><br><br></div>
+				<div id="priority-chipStage" class="chip"></div><br><br>				
+				<a class="waves-effect" href="#!">
+					<i id="archive" class="small material-icons action-icons" style="font-size: 3rem; color: black;">archive</i>
+				</a>
+				<span id="archive-count">0</span> idle projects
+				<!-- <span class="new badge badge-left" data-badge-caption="idle projects">4</span> -->
+				<br><br>
+				<a class="waves-effect" href="#!">
+					<i id="doneProjects" class="small material-icons action-icons" style="font-size: 3rem; color: black;">sentiment_very_satisfied</i>
+				</a>
+				<span id="doneProjects-count">0</span> done projects
+				<br><br>
+				<a class="waves-effect" href="#!">
+					<i id="graveyard" class="small material-icons action-icons" style="font-size: 3rem; color: black;" >delete_forever</i>
+				</a>
+				<span id="graveyard-count">0</span> discarded projects
+				<br><br>
+			</div>
+			
+			<!-- Archive Modal Definition -->
+			<div id="archiveModal" class="modal">
+				<div id="archiveModal-content" class="modal-content">
+			      <span id="archiveModal-header"><h5>Click a project to return it to Priorities Table</h5></span>
+			      <div id="archivePool">
+			      <!-- Chips added here  -->
+			      </div>     
+			    </div>
+			    <div class="modal-footer">
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		
+			<!-- doneProjects Modal Definition -->
+			<div id="doneProjectsModal" class="modal">
+				<div id="doneProjectsModal-content" class="modal-content">
+			      <span id="doneProjectsModal-header"><h5>Double click a project to return it to Priorities Table</h5></span>
+			      <div id="doneProjectsPool">
+			      <!-- Chips added here  -->
+			      </div>     
+			    </div>
+			    <div class="modal-footer">
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		    
+		    <!-- graveyard Modal Definition -->
+			<div id="graveyardModal" class="modal">
+				<div id="graveyardModal-content" class="modal-content">
+			      <span id="graveyardModal-header"><h5>Double click a project to return it to Priorities Table</h5></span>
+			      <div id="graveyardPool">
+			      <!-- Chips added here  -->
+			      </div>     
+			    </div>
+			    <div class="modal-footer">
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>					
+			
+		</div>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/globalVars.js"></script>
+	<script type="text/javascript" src="js/dataSource.js"></script>
+	<script type="text/javascript" src="js/getData.js"></script>
+	<script type="text/javascript" src="js/testDataFunctions.js"></script>
+	<script type="text/javascript" src="js/priorityTable.js"></script>
+	<script type="text/javascript" src="js/archive.js"></script>
+	<script type="text/javascript" src="js/doneProjects.js"></script>
+	<script type="text/javascript" src="js/graveyard.js"></script>
+	<script type="text/javascript" src="js/testdata.js"></script>
+	<script type="text/javascript" src="js/prioritiesStartup.js"></script>	
+	<!-- </div> -->
+</body>
+</html>

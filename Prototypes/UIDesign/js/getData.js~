@@ -1,0 +1,4 @@
+function initializeData () {
+	people = getPeople ("dummy");
+	console.log(people);
+}
