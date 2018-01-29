@@ -27,15 +27,19 @@
 			<div class="col s9">
 				<br><br>
 				<div class="col s2 valign-wrapper">
-					<i class="small material-icons">undo</i>
-					<i class="small material-icons">redo</i>		
+					<!-- <i class="small material-icons">undo</i>
+					<i class="small material-icons">redo</i>	 -->	
 				</div>
 				<div class="col s3 offset-s2 valign-wrapper">
-					Portfolio Title  <i class="small material-icons">arrow_drop_down</i>
+					Portfolio Title  <!-- <i class="small material-icons">arrow_drop_down</i> -->
 				</div>
 				<div class="col s2 offset-s3 valign-wrapper">
-					<i class="small material-icons" style="padding-right:5px">share</i>
-					<i class="small material-icons">list</i>
+					<a class="waves-effect" href="#!">
+						<i id="load_data" class="small material-icons action-icons" style="padding-right:5px">folder_open</i>
+					</a>
+					<a class="waves-effect" href="#!">
+						<i id="save_data" class="small material-icons action-icons">save</i>
+					</a>
 				</div>
 				<!-- Priorities table should start here -->
 					<br>
@@ -112,15 +116,11 @@
 					
 									
 			</div>
-			<!-- Test Divs, to show drop and intersecting rectangles -->
-			<div id="rect1" class="rect"></div>
-			<div id="rect2" class="rect" style="top:30;"></div>			
-			
 			
 			<!-- Side menu -->
 			<div class="col s2">
 				<br>
-				<div class="valign-wrapper">Username <i class="small material-icons">arrow_drop_down</i><br><br></div>
+				<!-- <div class="valign-wrapper">Username <i class="small material-icons">arrow_drop_down</i><br><br></div> -->
 				<div id="priority-chipStage" class="chip"></div><br><br>				
 				<a class="waves-effect" href="#!">
 					<i id="archive" class="small material-icons action-icons" style="font-size: 3rem; color: black;">archive</i>
@@ -177,7 +177,43 @@
 			    <div class="modal-footer">
 				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
 			    </div>
-		    </div>					
+		    </div>
+		    
+		    <!-- Load Modal Definition -->
+			<div id="loadDataModal" class="modal">
+				<div id="loadDataModal-content" class="modal-content">
+			      <span id="loadDataModal-header"><h5>Paste your Priorities Data below</h5></span>
+			      <textarea id="loadDataField">{"projects":{"stuff":"here"},
+			      	"people":{"1":"thisguy"},
+			      	"chips":{"15":"Thingy}
+			      	}
+			      </textarea>
+			    </div>
+			    <div class="modal-footer">
+			    		<a href="#!" id="updateData" class="modal-action modal-close waves-effect waves-green btn-flat disabled">Update</a>
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		    
+		    <!-- Save Modal Definition -->
+			<div id="saveDataModal" class="modal">
+				<div id="saveDataModal-content" class="modal-content">
+			      <span id="saveDataModal-header"><h5>Copy the data to a file for future use</h5></span>
+			      <div id="saveDataField">
+			      	<pre>
+			      	{"projects":{"stuff":"here"},
+			      	"people":{"1":"thisguy"},
+			      	"chips":{"15":"Thingy}
+			      	}
+			      	</pre>
+			      </div>     
+			    </div>
+			    <div class="modal-footer">
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		    
+		    					
 			
 		</div>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
@@ -189,6 +225,8 @@
 	<script type="text/javascript" src="js/archive.js"></script>
 	<script type="text/javascript" src="js/doneProjects.js"></script>
 	<script type="text/javascript" src="js/graveyard.js"></script>
+	<script type="text/javascript" src="js/loadData-modal.js"></script>
+	<script type="text/javascript" src="js/saveData-modal.js"></script>
 	<!-- <script type="text/javascript" src="js/testdata.js"></script> -->
 	<script type="text/javascript" src="js/prioritiesStartup.js"></script>	
 	<!-- </div> -->

@@ -7,6 +7,8 @@ $(document).ready(function(){
 	initializeArchive();
 	initializedoneProjects();
 	initializegraveyard();
+	initializeSaveData();
+	initializeLoadData();
 });
   
 console.log("prioritiesStartup loaded");
