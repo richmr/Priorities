@@ -183,30 +183,41 @@
 			<div id="loadDataModal" class="modal">
 				<div id="loadDataModal-content" class="modal-content">
 			      <span id="loadDataModal-header"><h5>Paste your Priorities Data below</h5></span>
-			      <textarea id="loadDataField">{"projects":{"stuff":"here"},
-			      	"people":{"1":"thisguy"},
-			      	"chips":{"15":"Thingy}
-			      	}
+			      <textarea id="loadDataField" class="load-modal">
 			      </textarea>
 			    </div>
 			    <div class="modal-footer">
-			    		<a href="#!" id="updateData" class="modal-action modal-close waves-effect waves-green btn-flat disabled">Update</a>
+			    		<a href="#!" id="updateData" class="waves-effect waves-green btn-flat">Update</a>
 				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
 			    </div>
 		    </div>
 		    
+			<!-- Data load results modal -->		    
+		    <div id="dataAnalysisModal" class="modal">
+				<div id="dataAnalysisModal-content" class="modal-content">
+			      <span id="dataAnalysisModal-header"><h5>Examining your data..</h5></span>
+			      <ul class="collection" id="dataAnalysis-collection">
+			      	<li class="collection-item" id="dataAnalysis-jsoncheck"><div>Data properly formatted..<span class="secondary-content"><i id="dataAnalysis-jsoncheck-check" class="material-icons grey-text">check_circle</i></span></div></li>
+			      </ul>
+			      <div class="progress">
+      				<div id="dataAnalysisModal-progress" class="indeterminate"></div>
+  					</div>
+			    </div>
+			    <div id="dataAnalysisModal-footer" class="modal-footer">
+			    	<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		    
 		    <!-- Save Modal Definition -->
-			<div id="saveDataModal" class="modal">
+			<div id="saveDataModal" class="modal save-modal">
 				<div id="saveDataModal-content" class="modal-content">
 			      <span id="saveDataModal-header"><h5>Copy the data to a file for future use</h5></span>
-			      <div id="saveDataField">
-			      	<pre>
+			      <textarea id="saveDataField" class="save-modal" readonly>
 			      	{"projects":{"stuff":"here"},
 			      	"people":{"1":"thisguy"},
 			      	"chips":{"15":"Thingy}
 			      	}
-			      	</pre>
-			      </div>     
+			      </textarea>     
 			    </div>
 			    <div class="modal-footer">
 				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>

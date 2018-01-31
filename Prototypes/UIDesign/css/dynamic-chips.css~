@@ -40,3 +40,17 @@
 	font-size: 3rem;
 	color: black;
 }
+
+.badge-left {
+	float: none;
+}
+
+.load-modal {
+	resize:none;
+	min-height:200px;
+}
+
+.save-modal {
+	resize:none;
+	min-height:200px;
+}	
