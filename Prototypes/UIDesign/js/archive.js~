@@ -68,7 +68,7 @@ function addChipToArchive( projectID ) {
 	$("#"+newID).disableSelection();
 	
 	// Set the count text
-	$("#archive-count").text(newCount+ " idle projects");
+	$("#archive-count").text(newCount);
 	
 	// return true 
 	return true;
@@ -110,8 +110,7 @@ function clickOnArchivedChip ( chipDOM ) {
 	// Reset the counter
 	var newCount = ($('div[id^="archivePool-"]').length-1);
 	// Set the count text
-	$("#archive-count").text(newCount+ " idle projects");
-	
+	$("#archive-count").text(newCount);
 		
 }
 

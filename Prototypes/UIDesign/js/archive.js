@@ -44,7 +44,8 @@ function initializeArchive() {
 
 function addChipToArchive( projectID ) {	
 	// Returns TRUE when the function completes correctly	
-	// Add project to archivedProjects - Maybe not, maybe just store in the html
+	// Add project to archivedProjects - Not done to prevent a lot of array searching and splitting
+	// Instead on "Save" the data must be pulled directly from the DOM 
 	
 	// Prepend html to archivePool
 	var title = projects[projectID].title;

@@ -7,7 +7,7 @@ $("#updateData").click(function (event) {
 		clickOnUpdateData();	
 	});
 	
-async function clickOnUpdateData() {
+function clickOnUpdateData() {
 	$("#loadDataModal").modal('close');
 	$("#dataAnalysisModal").modal('open');
 	$("#dataAnalysis-collection").empty();
@@ -18,20 +18,51 @@ async function clickOnUpdateData() {
 	try {
 		addDataAnalysisCollectionItem("dataAnalysis-jsoncheck", "Data properly formatted..");
 		var theData = JSON.parse(dataJSONString);
-		//$("#dataAnalysis-jsoncheck-check").removeClass("grey-text").addClass("green-text");
 		dataAnalysisSuccess("dataAnalysis-jsoncheck");		
 		
-		addDataAnalysisCollectionItem("dataAnalysis-ptable", "Priority table data found..");
-		await sleep(2000);
-		dataAnalysisSuccess("dataAnalysis-ptable");
+		addDataAnalysisCollectionItem("dataAnalysis-ptable", "Priority table data...");
+		if (priorityChips = theData["priorityChips"]) {
+			dataAnalysisSuccess("dataAnalysis-ptable");
+		} else {
+			dataAnalysisFail("dataAnalysis-ptable", "Table data not found");
+		}
+		
+		addDataAnalysisCollectionItem("dataAnalysis-archivedProjects", "Archived projects data...");
+		if (archivedProjects = theData["archivedProjects"]) {
+			dataAnalysisSuccess("dataAnalysis-archivedProjects");
+		} else {
+			dataAnalysisFail("dataAnalysis-archivedProjects", "Archived project data not found");
+		}
+		
+		addDataAnalysisCollectionItem("dataAnalysis-doneProjects", "Done project data...");
+		if (doneProjects = theData["doneProjects"]) {
+			dataAnalysisSuccess("dataAnalysis-doneProjects");
+		} else {
+			dataAnalysisFail("dataAnalysis-doneProjects", "Done project data not found");
+		}
+		
+		addDataAnalysisCollectionItem("dataAnalysis-graveyardProjects", "Graveyard projects data...");
+		if (graveyardProjects = theData["graveyardProjects"]) {
+			dataAnalysisSuccess("dataAnalysis-graveyardProjects");
+		} else {
+			dataAnalysisFail("dataAnalysis-graveyardProjects", "Graveyard project data not found");
+		}
+		
+		addDataAnalysisCollectionItem("dataAnalysis-projects", "Archived projects data...");
+		if (projects = theData["projects"]) {
+			dataAnalysisSuccess("dataAnalysis-projects");
+		} else {
+			dataAnalysisFail("dataAnalysis-projects", "No project data found");
+		}
+		
 		stopDataProgressBar();
+		newData();
 		
 	} catch(err) {
-		//$("#dataAnalysis-jsoncheck-check").removeClass("grey-text").addClass("red-text").text("remove_circle");
-		dataAnalysisFail("dataAnalysis-jsoncheck");		
+		// The only catch-able error here is a failed JSON parse
+		errText = "Your Priorities data is corrupt -> "+err.name + ": " + err.message;
+		dataAnalysisFail("dataAnalysis-jsoncheck", errText);		
 		stopDataProgressBar();
-		alert("I'm sorry, your Priorities data is corrupt.  Please check it and try again. Detailed error information below:\n\n"+err.name + ": " + err.message);
-		$("#dataAnalysisModal").modal('close');
 	}
 	
 	// Go through the parsed data and make sure it's all there
@@ -45,20 +76,24 @@ function sleep(ms) {
 
 function addDataAnalysisCollectionItem(id, displayText) {
 	// Adds a line to the dataAnalysisCollection display
-	var htmlSnippet = `<li class="collection-item" id="${id}"><div>${displayText}<span class="secondary-content"><i id="${id}-check" class="material-icons grey-text">check_circle</i></span></div></li>`
+	var htmlSnippet = `<li class="collection-item" id="${id}"><div><span id="${id}-displayText">${displayText}</span><span class="secondary-content"><i id="${id}-check" class="material-icons grey-text">check_circle</i></span></div></li>`
 	$("#dataAnalysis-collection").append(htmlSnippet);
 }
 
-function dataAnalysisSuccess (id) {
+function dataAnalysisSuccess (id, displayText = false) {
 	// Sets the "-check" to a green check circle for id
 	$("#"+id+"-check").removeClass("grey-text").addClass("green-text");
-	
+	if (displayText) {
+		$("#"+id+"-displayText").text(displayText);	
+	}
 }
 
-function dataAnalysisFail (id) {
+function dataAnalysisFail (id, displayText = false) {
 	// Sets the "-check" to a red do not enter for id
 	$("#"+id+"-check").removeClass("grey-text").addClass("red-text").text("remove_circle");
-		
+	if (displayText) {
+		$("#"+id+"-displayText").text(displayText);	
+	}	
 }
 
 function stopDataProgressBar() {

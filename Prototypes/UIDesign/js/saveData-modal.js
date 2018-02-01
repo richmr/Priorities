@@ -11,6 +11,8 @@ function initializeSaveData() {
 function clickOnSaveData () {
 	// Open the modal
 	$("#saveDataModal").modal('open');
+	var allData = consolidateData();
+	$("#saveDataField").val(JSON.stringify(allData));
 }
 
 
