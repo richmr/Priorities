@@ -115,4 +115,14 @@ function clickOnArchivedChip ( chipDOM ) {
 		
 }
 
+function saveArchive() {
+	// Will populate the archivedProjects global var with the projectIDs
+	archivedProjects=[];
+	$('div[id^="archivePool-"]').each( function (index) {
+		archivedProjects.push($(this).data("projectID"));
+	});
+}
+	
+
+
 console.log("archive loaded");

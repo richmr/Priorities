@@ -31,7 +31,7 @@
 					<i class="small material-icons">redo</i>	 -->	
 				</div>
 				<div class="col s3 offset-s2 valign-wrapper">
-					Portfolio Title  <!-- <i class="small material-icons">arrow_drop_down</i> -->
+					<span id="portfolioName">Portfolio Title</span>  <!-- <i class="small material-icons">arrow_drop_down</i> -->
 				</div>
 				<div class="col s2 offset-s3 valign-wrapper">
 					<a class="waves-effect" href="#!">
@@ -54,34 +54,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<!-- <tr>
-								<td>Person 1</td>
-								<td>
-									<a class="btn">Long title 1</a>
-									<br>
-									<a class="btn">Short 1     </a>
-								</td>
-								<td>
-									<a class="btn">Long title 1</a>
-									<br>
-									<a class="btn">Long title 2</a>
-								</td>
-								<td>
-									<a class="btn">Short       </a>
-									<br>
-									<a class="btn">Short       </a>
-								</td>
-								<td>
-									<a class="btn">in between  </a>
-									<br>
-									<a class="btn">in between  </a>
-								</td>
-							</tr> -->
 							<tr>
-								<td>Person 1</td>
+								<td id="row-1-name">Person 1</td>
 								<td>
 									<ul id="sortable-row1-1" class="row1Priorities">
-										<li><div id="priority-chip1" class="chip" ></div></li>
+										<li><div id="pc-row-1-spot-1" class="chip" ></div></li>
 										<li><div id="priority-chip2" class="chip" ></div></li>
 									</ul>
 								</td>
@@ -106,9 +83,11 @@
 							</tr>
 							
 							<!-- End of table content, "Add Row" next -->
-							<tr>
+							<tr id="lastTableRow">
 								<td>
-									<i class="small material-icons" style="font-size: 2rem">add_circle_outline</i>
+									<a class="waves-effect" href="#!">
+										<i id="addRowButton" class="small material-icons" style="font-size: 2rem">add_circle_outline</i>
+									</a>
 								</td>
 							</tr>
 						</tbody>					
@@ -184,6 +163,34 @@
 				<div id="loadDataModal-content" class="modal-content">
 			      <span id="loadDataModal-header"><h5>Paste your Priorities Data below</h5></span>
 			      <textarea id="loadDataField" class="load-modal">
+{"priorityChips":
+						{ "priority-chip1": { "projectID":"1", "blank":"0"},
+							"priority-chip2": { "projectID":"2", "blank":"0"},
+							"priority-chip3": { "projectID":"3", "blank":"0"},
+							"priority-chip4": { "projectID":"4", "blank":"0"},
+							"priority-chip5": { "projectID":"5", "blank":"0"},
+							"priority-chip6": { "projectID":"6", "blank":"0"},
+							"priority-chip7": { "projectID":"7", "blank":"0"},
+							"priority-chip8": { "projectID":"0", "blank":"0"},
+							"priority-chipStage" : {"projectID":"stage", "blank":"stage"}
+						},
+"archivedProjects": 	["15", "20"],
+"doneProjects": [],
+"graveyardProjects":[],
+"projects": { "0": {"title":" ", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"none"},
+						"1": {"title":"Extreme 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"2": {"title":"Extreme 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
+						"3": {"title":"High 1", "status":"chip-status-yellow", "draggable":true, "droppable":false, "click":"details"},
+						"4": {"title":"High 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
+						"5": {"title":"Medium 1", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
+						"6": {"title":"Really Long Medium 2", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"7": {"title":"Low 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"8": {"title":"Stored 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"15": {"title":"Archived 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"20": {"title":"Archived Too", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"}
+					}
+}
 			      </textarea>
 			    </div>
 			    <div class="modal-footer">
@@ -197,7 +204,7 @@
 				<div id="dataAnalysisModal-content" class="modal-content">
 			      <span id="dataAnalysisModal-header"><h5>Examining your data..</h5></span>
 			      <ul class="collection" id="dataAnalysis-collection">
-			      	<li class="collection-item" id="dataAnalysis-jsoncheck"><div>Data properly formatted..<span class="secondary-content"><i class="material-icons grey-text">check_circle</i></span></div></li>
+			      	<li class="collection-item" id="dataAnalysis-jsoncheck"><div>Data properly formatted..<span class="secondary-content"><i id="dataAnalysis-jsoncheck-check" class="material-icons grey-text">check_circle</i></span></div></li>
 			      </ul>
 			      <div class="progress">
       				<div id="dataAnalysisModal-progress" class="indeterminate"></div>
@@ -213,10 +220,6 @@
 				<div id="saveDataModal-content" class="modal-content">
 			      <span id="saveDataModal-header"><h5>Copy the data to a file for future use</h5></span>
 			      <textarea id="saveDataField" class="save-modal" readonly>
-			      	{"projects":{"stuff":"here"},
-			      	"people":{"1":"thisguy"},
-			      	"chips":{"15":"Thingy}
-			      	}
 			      </textarea>     
 			    </div>
 			    <div class="modal-footer">
@@ -238,6 +241,7 @@
 	<script type="text/javascript" src="js/graveyard.js"></script>
 	<script type="text/javascript" src="js/loadData-modal.js"></script>
 	<script type="text/javascript" src="js/saveData-modal.js"></script>
+	<script type="text/javascript" src="js/tableGen.js"></script>
 	<!-- <script type="text/javascript" src="js/testdata.js"></script> -->
 	<script type="text/javascript" src="js/prioritiesStartup.js"></script>	
 	<!-- </div> -->

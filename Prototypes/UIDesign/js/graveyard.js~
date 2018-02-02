@@ -107,7 +107,18 @@ function clickOngraveyardChip ( chipDOM ) {
 	$(chipDOM).animate(topright ,250, "linear", function() { $(chipDOM).remove(); updatePriorityChip($("#priority-chipStage")[0]);
 	$("#graveyardModal").modal('close');});
 	
-	
+	// Reset the counter
+	var newCount = ($('div[id^="graveyardPool-"]').length-1);
+	// Set the count text
+	$("#graveyard-count").text(newCount);
+}
+
+function saveGraveyard() {
+	// Will populate the graveyardProjects global var with the projectIDs
+	graveyardProjects=[];
+	$("#graveyardPool").each( function (index) {
+		graveyardProjects.push($(this).data("projectID"));
+	});
 }
 
 console.log("graveyard loaded");

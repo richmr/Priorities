@@ -1,0 +1,68 @@
+// Builds the Priorities table from the loaded data
+
+function rowStart( rowID ) {
+	// Returns the html string start of the row
+	var rowname = priorityRowData["rows"][rowID]["name"];
+	var htmlstring = '<tr id="row-'+rowID+'"><td id="row-'+rowID+'-name">'+rowname+'</td>';
+	return htmlstring;
+}
+
+function chipSpot(id) {
+	// Generates an html snippet for a chip spot with ID id
+	var htmlstring = '<li><div id="'+id+'" class="chip"></div></li>';
+	return htmlstring;
+}
+
+function chipSection( rowID, sectionNum ) {
+	// Returns a single chip section, basically a TD cell with a proper count of
+	// properly labeled chip locations
+	var spotNameStart = "priority-row-"+rowID+"-spot-";
+	var numslots = priorityRowData["rows"][rowID]["slots"];
+	var countStart = sectionNum * numslots + 1;
+	var htmlstring = "<td><ul>";
+	for (i = 0; i < numslots; i++) {
+		htmlstring += chipSpot(spotNameStart+(countStart+i));
+	}
+	htmlstring += "</ul></td>";
+	return htmlstring;
+}
+
+function allChipSections(rowID) {
+	// Generates all the chip sections for a given row
+	var htmlstring = "";
+	for (section = 0; section < priorityRowData["categories"].length; section++) {
+		htmlstring += chipSection(rowID, section);	
+	}
+	return htmlstring;
+}
+
+function rowEnd( rowID ) {
+	var htmlstring = "</tr>";
+	return htmlstring;
+}
+
+function rowFromData(rowID) {
+	// Generates a whole new row from data
+	var htmlstring = rowStart(rowID);
+	htmlstring += allChipSections(rowID);
+	htmlstring += rowEnd(rowID);
+	return htmlstring;
+}
+
+function newRow() {
+	// Get current row count
+	var numRows = Object.keys(priorityRowData["rows"]).length;
+	var thisRow = numRows+1;
+	priorityRowData["rows"][thisRow]=JSON.parse('{"name":"Click to Change", "slots":2}');
+	return rowFromData(thisRow);
+}
+
+function addRowToTable(rowID=false) {
+	if (rowID) {
+		$("#lastTableRow").before(rowFromData(rowID));
+	} else {
+		$("#lastTableRow").before(newRow());
+	}
+}
+
+

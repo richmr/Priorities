@@ -1,16 +1,19 @@
 // Global variable declarations
 
-var portfolios = {};
+var portfolios = {"name":"Click to Change"};
+var priorityRowData = { "categories":["Extreme", "High", "Med", "Low"],
+								"rows":{"1":{"name":"Click to Change", "slots":2}}
+							};
 var people = {};
 
-var priorityChips = { "priority-chip1": { "projectID":"0", "blank":"0"},
-							"priority-chip2": { "projectID":"0", "blank":"0"},
-							"priority-chip3": { "projectID":"0", "blank":"0"},
-							"priority-chip4": { "projectID":"0", "blank":"0"},
-							"priority-chip5": { "projectID":"0", "blank":"0"},
-							"priority-chip6": { "projectID":"0", "blank":"0"},
-							"priority-chip7": { "projectID":"0", "blank":"0"},
-							"priority-chip8": { "projectID":"0", "blank":"0"},
+var priorityChips = { "priority-row-1-spot-1": { "projectID":"0", "blank":"0"},
+							"priority-row-1-spot-2": { "projectID":"0", "blank":"0"},
+							"priority-row-1-spot-3": { "projectID":"0", "blank":"0"},
+							"priority-row-1-spot-4": { "projectID":"0", "blank":"0"},
+							"priority-row-1-spot-5": { "projectID":"0", "blank":"0"},
+							"priority-row-1-spot-6": { "projectID":"0", "blank":"0"},
+							"priority-row-1-spot-7": { "projectID":"0", "blank":"0"},
+							"priority-row-1-spot-8": { "projectID":"0", "blank":"0"},
 							"priority-chipStage" : {"projectID":"stage", "blank":"stage"}
 						};
 var archivedProjects = [];
@@ -24,6 +27,11 @@ var projects = { "0": {"title":" ", "status":"chip-placeholder", "draggable":fal
 
 function consolidateData() {
 	// Returns a consolidated JSON object with all data
+	// First update the pools
+	saveArchive();
+	saveGraveyard();
+	saveDone();
+	
 	var allData = {};
 	allData["portfolios"] = portfolios;
 	allData["people"] = people;

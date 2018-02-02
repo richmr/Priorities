@@ -113,4 +113,12 @@ function clickOngraveyardChip ( chipDOM ) {
 	$("#graveyard-count").text(newCount);
 }
 
+function saveGraveyard() {
+	// Will populate the graveyardProjects global var with the projectIDs
+	graveyardProjects=[];
+	$('div[id^="graveyardPool-"]').each( function (index) {
+		graveyardProjects.push($(this).data("projectID"));
+	});
+}
+
 console.log("graveyard loaded");

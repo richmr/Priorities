@@ -117,4 +117,12 @@ function clickOndoneProjectsChip ( chipDOM ) {
 			
 }
 
+function saveDone() {
+	// Will populate the graveyardProjects global var with the projectIDs
+	doneProjects=[];
+	$('div[id^="doneProjectsPool-"]').each( function (index) {
+		doneProjects.push($(this).data("projectID"));
+	});
+}
+
 console.log("doneProjects loaded");
