@@ -122,7 +122,14 @@ function saveArchive() {
 		archivedProjects.push($(this).data("projectID"));
 	});
 }
-	
+
+function clearArchive() {
+	// Non-recoverable delete of projects in archive
+	// Intended for use only on a data reset
+	$('div[id^="archivePool"]').each(function( index ) {
+		$(this).empty();
+	});
+}
 
 
 console.log("archive loaded");

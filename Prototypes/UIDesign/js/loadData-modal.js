@@ -21,11 +21,28 @@ function clickOnUpdateData() {
 		var theData = JSON.parse(dataJSONString);
 		dataAnalysisSuccess("dataAnalysis-jsoncheck");		
 		
-		addDataAnalysisCollectionItem("dataAnalysis-ptable", "Priority table data...");
+		addDataAnalysisCollectionItem("dataAnalysis-portfolios", "Portfolio data...");
+		if (portfolios = theData["portfolios"]) {
+			dataAnalysisSuccess("dataAnalysis-portfolios");
+		} else {
+			dataAnalysisFail("dataAnalysis-portfolios", "Portfolio data not found");
+			fullSuccess = false;
+		}
+
+		addDataAnalysisCollectionItem("dataAnalysis-priorityRowData", "Row data...");
+		if (priorityRowData = theData["priorityRowData"]) {
+			dataAnalysisSuccess("dataAnalysis-priorityRowData");
+		} else {
+			dataAnalysisFail("dataAnalysis-priorityRowData", "Row data not found");
+			fullSuccess = false;
+		}
+		
+		
+		addDataAnalysisCollectionItem("dataAnalysis-ptable", "Chip location data...");
 		if (priorityChips = theData["priorityChips"]) {
 			dataAnalysisSuccess("dataAnalysis-ptable");
 		} else {
-			dataAnalysisFail("dataAnalysis-ptable", "Table data not found");
+			dataAnalysisFail("dataAnalysis-ptable", "Chip location data not found");
 			fullSuccess = false;
 		}
 		

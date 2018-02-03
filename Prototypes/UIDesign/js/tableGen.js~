@@ -51,18 +51,58 @@ function rowFromData(rowID) {
 
 function newRow() {
 	// Get current row count
-	var numRows = Object.keys(priorityRowData["rows"]).length;
-	var thisRow = numRows+1;
-	priorityRowData["rows"][thisRow]='{"name":"Click to Change", "slots":2}';
-	return rowFromData(thisRow);
+	var thisRow = priorityRowData["nextRowID"];
+	priorityRowData["rows"][thisRow]=JSON.parse('{"name":"Click to Change", "slots":2}');
+	priorityRowData["nextRowID"] += 1;
+	return thisRow;
 }
 
 function addRowToTable(rowID=false) {
 	if (rowID) {
 		$("#lastTableRow").before(rowFromData(rowID));
 	} else {
-		$("#lastTableRow").before(newRow());
+		rowID = newRow();
+		$("#lastTableRow").before(rowFromData(rowID));
 	}
+	
+	initializeTableRow(rowID);
+}
+
+function deleteRowFromTable(rowID, protectProjects = true) {
+	// rowID = the ID number, not the DOM ID name
+	// if protectProjects, then pops an alert if there are projects still assigned on the row
+	if (protectProjects) {
+		var projectsDetected = false;
+		$('div[id^="priority-row-'+rowID+'"]' ).each(function( index ) {
+			// Test what the projectID for this DOM element is
+			if (priorityChips[this.id] != 0) {
+				projectsDetected = true;
+			}
+		});
+		if (projectsDetected) {
+			// Set the modal data
+			$("#saveProjectsModal-rowname").text($("#row-"+rowID+"-name").text());
+			$("#saveProjectsModal").modal('open');
+			return;
+		}	
+	}
+	
+	// Delete the associated data first
+	$('div[id^="priority-row-'+rowID+'"]' ).each(function( index ) {
+		// Test what the projectID for this DOM element is
+		delete priorityChips[this.id];
+	});
+	// Delete the row
+	$("#row-"+rowID).empty();
+}
+
+function resetTable() {
+	var lastRowHTML = '<tr id="lastTableRow">' +
+							'<td>' +
+							'<a class="waves-effect" href="#!">' +
+							'<i id="addRowButton" class="small material-icons" style="font-size: 2rem">add_circle_outline</i>' +
+							'</a></td></tr>';
+	$("#priorityTableDynamicContent").html(lastRowHTML);
 }
 
 

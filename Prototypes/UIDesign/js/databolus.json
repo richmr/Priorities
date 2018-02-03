@@ -1,12 +1,12 @@
 {"priorityChips":
-						{ "priority-chip1": { "projectID":"1", "blank":"0"},
-							"priority-chip2": { "projectID":"2", "blank":"0"},
-							"priority-chip3": { "projectID":"3", "blank":"0"},
-							"priority-chip4": { "projectID":"4", "blank":"0"},
-							"priority-chip5": { "projectID":"5", "blank":"0"},
-							"priority-chip6": { "projectID":"6", "blank":"0"},
-							"priority-chip7": { "projectID":"7", "blank":"0"},
-							"priority-chip8": { "projectID":"0", "blank":"0"},
+						{ "priority-row-1-spot-1": { "projectID":"1", "blank":"0"},
+							"priority-row-1-spot-2": { "projectID":"2", "blank":"0"},
+							"priority-row-1-spot-3": { "projectID":"3", "blank":"0"},
+							"priority-row-1-spot-4": { "projectID":"4", "blank":"0"},
+							"priority-row-1-spot-5": { "projectID":"5", "blank":"0"},
+							"priority-row-1-spot-6": { "projectID":"6", "blank":"0"},
+							"priority-row-1-spot-7": { "projectID":"7", "blank":"0"},
+							"priority-row-1-spot-8": { "projectID":"0", "blank":"0"},
 							"priority-chipStage" : {"projectID":"stage", "blank":"stage"}
 						},
 "archivedProjects": 	["15", "20"],
@@ -24,5 +24,10 @@
 						"15": {"title":"Archived 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
 						"20": {"title":"Archived Too", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
 						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"}
-					}
+					},
+"portfolios":{"name":"Click to Change"},
+"priorityRowData":{ "categories":["Extreme", "High", "Med", "Low"],
+								"nextRowID":2,
+								"rows":{"1":{"name":"Do this stuff", "slots":2}}
+							}
 }

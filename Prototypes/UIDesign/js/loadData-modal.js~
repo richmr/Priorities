@@ -16,15 +16,34 @@ function clickOnUpdateData() {
 	var dataJSONString = $("#loadDataField").val();
 	
 	try {
+		var fullSuccess = true;
 		addDataAnalysisCollectionItem("dataAnalysis-jsoncheck", "Data properly formatted..");
 		var theData = JSON.parse(dataJSONString);
 		dataAnalysisSuccess("dataAnalysis-jsoncheck");		
 		
-		addDataAnalysisCollectionItem("dataAnalysis-ptable", "Priority table data...");
+		addDataAnalysisCollectionItem("dataAnalysis-portfolios", "Portfolio data...");
+		if (priorityChips = theData["portfolios"]) {
+			dataAnalysisSuccess("dataAnalysis-portfolios");
+		} else {
+			dataAnalysisFail("dataAnalysis-portfolios", "Portfolio data not found");
+			fullSuccess = false;
+		}
+
+		addDataAnalysisCollectionItem("dataAnalysis-priorityRowData", "Row data...");
+		if (priorityChips = theData["priorityRowData"]) {
+			dataAnalysisSuccess("dataAnalysis-priorityRowData");
+		} else {
+			dataAnalysisFail("dataAnalysis-priorityRowData", "Row data not found");
+			fullSuccess = false;
+		}
+		
+		
+		addDataAnalysisCollectionItem("dataAnalysis-ptable", "Chip location data...");
 		if (priorityChips = theData["priorityChips"]) {
 			dataAnalysisSuccess("dataAnalysis-ptable");
 		} else {
-			dataAnalysisFail("dataAnalysis-ptable", "Table data not found");
+			dataAnalysisFail("dataAnalysis-ptable", "Chip location data not found");
+			fullSuccess = false;
 		}
 		
 		addDataAnalysisCollectionItem("dataAnalysis-archivedProjects", "Archived projects data...");
@@ -32,6 +51,7 @@ function clickOnUpdateData() {
 			dataAnalysisSuccess("dataAnalysis-archivedProjects");
 		} else {
 			dataAnalysisFail("dataAnalysis-archivedProjects", "Archived project data not found");
+			fullSuccess = false;
 		}
 		
 		addDataAnalysisCollectionItem("dataAnalysis-doneProjects", "Done project data...");
@@ -39,6 +59,7 @@ function clickOnUpdateData() {
 			dataAnalysisSuccess("dataAnalysis-doneProjects");
 		} else {
 			dataAnalysisFail("dataAnalysis-doneProjects", "Done project data not found");
+			fullSuccess = false;
 		}
 		
 		addDataAnalysisCollectionItem("dataAnalysis-graveyardProjects", "Graveyard projects data...");
@@ -46,6 +67,7 @@ function clickOnUpdateData() {
 			dataAnalysisSuccess("dataAnalysis-graveyardProjects");
 		} else {
 			dataAnalysisFail("dataAnalysis-graveyardProjects", "Graveyard project data not found");
+			fullSuccess = false;
 		}
 		
 		addDataAnalysisCollectionItem("dataAnalysis-projects", "Archived projects data...");
@@ -53,10 +75,19 @@ function clickOnUpdateData() {
 			dataAnalysisSuccess("dataAnalysis-projects");
 		} else {
 			dataAnalysisFail("dataAnalysis-projects", "No project data found");
+			fullSuccess = false;
 		}
 		
 		stopDataProgressBar();
-		newData();
+		
+		if (fullSuccess) {
+			newData();
+		} else {
+			addDataAnalysisCollectionItem("dataAnalysis-fail", "There are missing pieces of your data, I cannot continue");
+			dataAnalysisFail("dataAnalysis-fail");
+		}
+		
+		
 		
 	} catch(err) {
 		// The only catch-able error here is a failed JSON parse
@@ -65,7 +96,6 @@ function clickOnUpdateData() {
 		stopDataProgressBar();
 	}
 	
-	// Go through the parsed data and make sure it's all there
 	
 }
 

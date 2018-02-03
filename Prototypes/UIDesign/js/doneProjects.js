@@ -125,4 +125,12 @@ function saveDone() {
 	});
 }
 
+function clearDoneProjects() {
+	// Non-recoverable delete of projects in done
+	// Intended for use only on a data reset
+	$('div[id^="doneProjectsPool"]').each(function( index ) {
+		$(this).empty();
+	});
+}
+
 console.log("doneProjects loaded");

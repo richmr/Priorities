@@ -2,6 +2,7 @@
 
 var portfolios = {"name":"Click to Change"};
 var priorityRowData = { "categories":["Extreme", "High", "Med", "Low"],
+								"nextRowID":2,
 								"rows":{"1":{"name":"Click to Change", "slots":2}}
 							};
 var people = {};
@@ -34,6 +35,7 @@ function consolidateData() {
 	
 	var allData = {};
 	allData["portfolios"] = portfolios;
+	allData["priorityRowData"] = priorityRowData;
 	allData["people"] = people;
 	allData["priorityChips"] = priorityChips;
 	allData["archivedProjects"] = archivedProjects;

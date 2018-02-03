@@ -9,10 +9,20 @@ $(document).ready(function(){
 });
 
 function newData() {
-	initializePriorityTable()
+	clearHTML();
+	initializePriorityTable();
 	initializeArchive();
 	initializedoneProjects();
 	initializegraveyard();
+}
+
+function clearHTML() {
+	// These functions are designed to delete the existing DOM/HTML data, but not
+	// the values in the global variables.  Those are needed to recreate the correct table!
+	clearPriorityTable();
+	clearArchive();
+	cleardoneProjects();
+	clearGraveyard();
 }
   
 console.log("prioritiesStartup loaded");
