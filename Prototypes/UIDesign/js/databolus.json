@@ -13,7 +13,15 @@
 "doneProjects": [],
 "graveyardProjects":[],
 "projects": { "0": {"title":" ", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"none"},
-						"1": {"title":"Extreme 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"1": 
+							{"title":"Edit this one", 
+							"status":"chip-status-red", 
+							"draggable":true, 
+							"droppable":false, 
+							"click":"details",
+							"goal":"",
+							"tasks":[{"who":"Bob", "what":"Be your uncle", "when":""}]
+							},
 						"2": {"title":"Extreme 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
 						"3": {"title":"High 1", "status":"chip-status-yellow", "draggable":true, "droppable":false, "click":"details"},
 						"4": {"title":"High 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},

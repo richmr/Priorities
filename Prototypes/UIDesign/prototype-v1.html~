@@ -189,7 +189,7 @@
 						"20": {"title":"Archived Too", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
 						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"}
 					},
-"portfolios":{"name":"Click to Change"},
+"portfolios":{"name":"Bobs My Uncle"},
 "priorityRowData":{ "categories":["Extreme", "High", "Med", "Low"],
 								"nextRowID":2,
 								"rows":{"1":{"name":"Do this stuff", "slots":2}}
@@ -241,10 +241,77 @@
 				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
 			    </div>
 		    </div>
-		    					
+		    
+		    <!-- Edit Project Modal Definition -->
+			<div id="editProjectModal" class="modal">
+				<div id="editProjectModal-content" class="modal-content">
+			      <span id="editProjectModal-header"><h5><span id="newOrEditProject">Edit</span> Project</h5></span>
+			      <div class="row">
+    					<form action="#" class="col s12">
+    						<div class="row">
+        						<div class="input-field col s12">
+        							<input placeholder="Enter project title here" id="editProject-Title" type="text" >
+          						<!-- <label for="editProject-Title">Project Title</label> -->
+        						</div>
+        					</div>
+        					<div class="row valign-wrapper">
+        						<div class="col s1">Goal:</div>
+        						<div class="col s3">
+	        						<input placeholder="When" id="editProject-goal" type="text" class="datepicker">
+        						</div>
+        						<div class="col s2 right-align">Status:</div>
+        						<div class="col s2 center-align chip-status-green">
+        							<input class="with-gap" name="editProject-status" type="radio" id="status-green" checked >
+        							<label for="status-green">Green</label>
+      						</div>
+      						<div class="col s2 center-align chip-status-yellow">
+        							<input class="with-gap" name="editProject-status" type="radio" id="status-yellow">
+        							<label for="status-yellow">Yellow</label>
+      						</div>
+								<div class="col s2 center-align chip-status-red">
+        							<input class="with-gap" name="editProject-status" type="radio" id="status-red">
+        							<label for="status-red">Red</label>
+      						</div>
+        					</div>
+        					<div class="row">
+								<div class="col s12">Task list</div>
+        					</div>
+        					<div id="editProject-TaskList">
+	        					<div class="row valign-wrapper">
+									<div class="input-field col s2">
+										<input placeholder="Who" id="task-1-who" type="text">
+	          						<!-- <label for="task-1-who">Who</label> -->
+	          					</div>
+	          					<div class="input-field col s5">
+										<input placeholder="What" id="task-1-what" type="text">
+	          						<!-- <label for="task-1-what">What</label> -->
+	          					</div>
+	          					<div class="input-field col s3">
+										<input placeholder="When" id="task-1-when" type="text" class="datepicker">
+	          						<!-- <label for="task-1-when">When</label> -->
+	          					</div>
+	          					<div class="col s1">
+										<input type="checkbox" class="filled-in" id="task-1-done">
+										<label for="task-1-done"> </label>
+	          					</div>		
+	        					</div>
+	        					<div class="row" id="editProject-taskListEnd">
+	        						<a class="waves-effect" href="#!">
+										<i id="editProject-addRowButton" class="small material-icons">add_circle_outline</i>
+									</a>
+								</div>
+        					</div>
+        				</form>
+			    </div>
+			    <div class="modal-footer">
+				     <a id="addANote" href="#!" class="waves-effect waves-green btn-flat">Add a Note</a>
+				      <a id="saveProjectData" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Save</a>
+				      <a id="cancelProjectData" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			    </div>
+		    </div>
+		  </div>					
 			
 		</div>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/globalVars.js"></script>
 	<script type="text/javascript" src="js/dataSource.js"></script>
 	<script type="text/javascript" src="js/getData.js"></script>
@@ -257,7 +324,9 @@
 	<script type="text/javascript" src="js/saveData-modal.js"></script>
 	<script type="text/javascript" src="js/tableGen.js"></script>
 	<!-- <script type="text/javascript" src="js/testdata.js"></script> -->
+	<script type="text/javascript" src="js/editProject.js"></script>	
 	<script type="text/javascript" src="js/prioritiesStartup.js"></script>	
+	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<!-- </div> -->
 </body>
 </html>

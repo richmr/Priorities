@@ -6,6 +6,7 @@ $(document).ready(function(){
 	newData();
 	initializeSaveData();
 	initializeLoadData();
+	//initializeEditProject();
 });
 
 function newData() {
@@ -21,7 +22,7 @@ function clearHTML() {
 	// the values in the global variables.  Those are needed to recreate the correct table!
 	clearPriorityTable();
 	clearArchive();
-	cleardoneProjects();
+	clearDoneProjects();
 	clearGraveyard();
 }
   
