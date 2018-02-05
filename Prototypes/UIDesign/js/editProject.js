@@ -1,3 +1,7 @@
+// Edit project global vars
+var editProjectID;
+var editNewProject = false;
+
 function initializeEditProject() {
 	// Set up the date picker
 	$('.datepicker').pickadate({
@@ -9,17 +13,81 @@ function initializeEditProject() {
 	    closeOnSelect: true // Close upon selecting a date,
   });
   
-  
+  // Activate buttons:
+  $("#addANote").unbind("click");
+	$("#addANote").click(function(event) {
+		clickaddANote();		
+	});
+	
+	$("#saveProjectData").unbind("click");
+	$("#saveProjectData").click(function(event) {
+		clicksaveProjectData();		
+	});
+	
+	$("#cancelProjectData").unbind("click");
+	$("#cancelProjectData").click(function(event) {
+		clickcancelProjectData();		
+	});
+	
+	$("#cancelProjectNotes").unbind("click");
+	$("#cancelProjectNotes").click(function(event) {
+		clickcancelProjectNotes();		
+	});
+	
+	$("#saveProjectNotes").unbind("click");
+	$("#saveProjectNotes").click(function(event) {
+		clicksaveProjectNotes();		
+	});
+	
   // open the modal - this was for testing and design
   $("#editProjectModal").modal("open");
 }
 
+function clickaddANote() {
+	// Set the note to current data
+	$("#projectNoteField").val(projects[editProjectID]["note"]);
+	
+	// open the modal - this was for testing and design
+  $("#addANoteModal").modal("open");	
+}
+
+function clicksaveProjectData() {
+	// open the modal - this was for testing and design
+  $("#editProjectModal").modal("close");	
+	
+	// Set the note to current data	
+}
+
+function clickcancelProjectData() {
+	// By design, no changes are made to the actual underlying data until "save" is clicked.
+	// So just close the modal.
+  $("#editProjectModal").modal("close");
+  
+  // The only caveat to that is if this were a new project.. Maybe not.  	
+}
+
+function clickcancelProjectNotes() {
+	// By design, no changes are made to the actual underlying data until "save" is clicked.
+	// So just close the modal.
+  $("#editProjectModal").modal("close");
+}
+
+function clicksaveProjectNotes() {
+	  projects[editProjectID]["note"] = $("#projectNoteField").val();
+  $("#addANoteModal").modal("close");	
+}
+
 function editProject(projID, newProject=false) {
+	// Set the global variable
+	editProjectID = projID;
+	editNewProject = newProject;	
+	
 	// Opens the modal with the data for this project
 	var title = "";
 	var goal = "";
 	var status = "chip-status-green";
 	var tasks = [];
+	var note="";
 	// Is this a new project?  Set text accordingly
 	if (newProject) {
 		$("#newOrEditProject").text("New");
@@ -28,8 +96,64 @@ function editProject(projID, newProject=false) {
 		var proj = projects[projID];
 		title = proj["title"];
 		status = proj["status"];
+		goal = proj["goal"];
 		tasks = proj["tasks"];
+		note = proj["note"];
 	}
 	
-	// Set the project title
+	// Set basic data
+	$("#editProject-Title").val(title);
+	$("#editProject-goal").val(goal);
+	
+	if (status=="chip-status-green") {
+		$("#status-green").prop("checked", true);	
+	} else if (status=="chip-status-yellow") {
+		$("#status-yellow").prop("checked", true);	
+	} else if (status=="chip-status-red") {
+		$("#status-red").prop("checked", true);	
+	}
+	
+	// iterate over tasks
+	// First set task list to empty list
+	$("#editProject-TaskList").html(addTaskButtonHTML());
+	
+	// Activate the button
+	$("#editProject-addTaskButton").unbind("click");
+	$("#editProject-addTaskButton").click(function(event) {
+		clickaddTaskButton();		
+	});
+	 
+}
+
+function addTaskButtonHTML() {
+	// Returns the html for the addTaskButton
+	var htmlstring = '<div class="row" id="editProject-taskListEnd">' +
+  							'<a class="waves-effect" href="#!">' +
+							'<i id="editProject-addTaskButton" class="small material-icons">add_circle_outline</i>' +
+							'</a></div>';
+	return htmlstring;
+}
+
+function newTaskHeaderHTML(taskID) {
+	return '<div id="task-'+taskID+'" class="row valign-wrapper">';
+}
+
+function newTaskWho(taskID, who=false) {
+	var htmlstring = '<div class="input-field col s2">';
+	if (who) {
+		htmlstring += '<input placeholder="Who" id="task-'+taskID+'-who" type="text" value="'+who+'">';
+	} else {
+		htmlstring += '<input placeholder="Who" id="task-'+taskID+'-who" type="text">';
+	}
+	htmlstring += '</div>';
+	return htmlstring;
+}
+
+function addTaskRow(taskObj = false) {
+	// Adds a task row, with task data if present
+	
+}
+
+function clickaddTaskButton() {
+	addTaskRow();
 }

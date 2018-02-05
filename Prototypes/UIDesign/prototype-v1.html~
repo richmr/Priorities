@@ -297,19 +297,32 @@
 	        					</div>
 	        					<div class="row" id="editProject-taskListEnd">
 	        						<a class="waves-effect" href="#!">
-										<i id="editProject-addRowButton" class="small material-icons">add_circle_outline</i>
+										<i id="editProject-addTaskButton" class="small material-icons">add_circle_outline</i>
 									</a>
 								</div>
         					</div>
         				</form>
 			    </div>
 			    <div class="modal-footer">
-				     <a id="addANote" href="#!" class="waves-effect waves-green btn-flat">Add a Note</a>
-				      <a id="saveProjectData" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Save</a>
-				      <a id="cancelProjectData" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+				     <a id="addANote" href="#!" class="waves-effect waves-green btn-flat">Notes</a>
+				      <a id="saveProjectData" href="#!" class="waves-effect waves-green btn-flat">Save</a>
+				      <a id="cancelProjectData" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
 			    </div>
 		    </div>
 		  </div>					
+		
+			<!-- Project notes modal -->		    
+		    <div id="addANoteModal" class="modal">
+				<div id="addANoteModal-content" class="modal-content">
+			      <span id="addANoteModal-header"><h5>Notes for this project:</h5></span>
+			      <textarea id="projectNoteField" class="load-modal"></textarea>
+			   </div>
+			    <div id="addANoteModal-footer" class="modal-footer">
+			    	<a id="saveProjectNotes" href="#!" class="waves-effect waves-green btn-flat">Save</a>
+				   <a id="cancelProjectNotes" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
+			    </div>
+		    </div>
+				
 			
 		</div>
 	<script type="text/javascript" src="js/globalVars.js"></script>

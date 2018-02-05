@@ -18,8 +18,11 @@
 							"status":"chip-status-red", 
 							"draggable":true, 
 							"droppable":false, 
-							"click":"details"
-						},
+							"click":"details",
+							"goal":"",
+							"tasks":[{"who":"Bob", "what":"Be your uncle", "when":""}],
+							"note":""
+							},
 						"2": {"title":"Extreme 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
 						"3": {"title":"High 1", "status":"chip-status-yellow", "draggable":true, "droppable":false, "click":"details"},
 						"4": {"title":"High 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},

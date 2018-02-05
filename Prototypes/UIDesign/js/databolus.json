@@ -20,7 +20,8 @@
 							"droppable":false, 
 							"click":"details",
 							"goal":"",
-							"tasks":[{"who":"Bob", "what":"Be your uncle", "when":""}]
+							"tasks":[{"who":"Bob", "what":"Be your uncle", "when":""}],
+							"note":""
 							},
 						"2": {"title":"Extreme 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
 						"3": {"title":"High 1", "status":"chip-status-yellow", "draggable":true, "droppable":false, "click":"details"},
@@ -31,7 +32,8 @@
 						"8": {"title":"Stored 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
 						"15": {"title":"Archived 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
 						"20": {"title":"Archived Too", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
-						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"}
+						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"},
+						"nextProjID":"21"
 					},
 "portfolios":{"name":"Click to Change"},
 "priorityRowData":{ "categories":["Extreme", "High", "Med", "Low"],
