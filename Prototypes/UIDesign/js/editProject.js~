@@ -122,6 +122,14 @@ function editProject(projID, newProject=false) {
 	$("#editProject-addTaskButton").click(function(event) {
 		clickaddTaskButton();		
 	});
+	
+	// Set the "next task ID" data
+	$("#editProject-TaskList").data("nextTaskID", 1);
+	
+	// Iterate
+	$.each(tasks, function( index, value ) {
+		  addTaskRow(value);
+	});
 	 
 }
 
@@ -149,9 +157,61 @@ function newTaskWho(taskID, who=false) {
 	return htmlstring;
 }
 
+function newTaskWhat(taskID, what=false) {
+	var htmlstring = '<div class="input-field col s5">';
+	if (who) {
+		htmlstring += '<input placeholder="What" id="task-'+taskID+'-what" type="text" value="'+what+'">';
+	} else {
+		htmlstring += '<input placeholder="What" id="task-'+taskID+'-What" type="text">';
+	}
+	htmlstring += '</div>';
+	return htmlstring;
+}
+
+function newTaskWhen(taskID, when=false) {
+	var htmlstring = '<div class="input-field col s3">';
+	if (who) {
+		htmlstring += '<input placeholder="When" id="task-'+taskID+'-when" type="text" value="'+when+'">';
+	} else {
+		htmlstring += '<input placeholder="When" id="task-'+taskID+'-when" type="text">';
+	}
+	htmlstring += '</div>';
+	return htmlstring;
+}
+
+function newTaskDone(taskID, done=false) {
+	var htmlstring = '<div class="col s1">';
+	htmlstring += '<input type="checkbox" class="filled-in" id="task-'+taskID+'-done">';
+	htmlstring += '<label for="task-'+taskID+'-done"> </label>'
+	htmlstring += '</div>';
+	return htmlstring;
+}
+
+function newTaskFooter(taskID) {
+	return '</div>';
+}
+
 function addTaskRow(taskObj = false) {
 	// Adds a task row, with task data if present
+	var taskID = $("#editProject-TaskList").data("nextTaskID");	
+	var htmlstring = newTaskHeaderHTML(taskID);
+	var who, what, when;
+	if (taskObj) {
+		who = taskObj["Who"];
+		what = taskObj["What"];
+		when = taskObj["When"];		
+	}
 	
+	htmlstring += newTaskWho(taskID, who);
+	htmlstring += newTaskWhat(taskID, what);
+	htmlstring += newTaskWhen(taskID, when);
+	htmlstring += newTaskDone(taskID);
+	htmlstring += newTaskFooter(taskID);
+	
+	$("#editProject-taskListEnd").before(htmlstring);
+	
+	// increment the nextTaskID
+	$("#editProject-TaskList").data("nextTaskID", taskID+1);
 }
 
 function clickaddTaskButton() {
