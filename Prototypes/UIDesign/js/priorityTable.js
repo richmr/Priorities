@@ -1,3 +1,6 @@
+// Global var hack to track which chip is being edited
+var chipBeingEdited;
+
 function updatePriorityChip( chip ) {
 	// This will update the chip with the most recent data
 	// I assume all chips have been marked as draggable and droppable already
@@ -42,18 +45,23 @@ function updatePriorityChip( chip ) {
 	}
 	
 	if (thisProj.click == "details") {
-		$(chip).unbind("click");
-		$(chip).click(function(event) {
-			clickChip( event.target );		
+		$(chip).off("dblclick");
+		$(chip).dblclick(function(event) {
+			editChip( event.target );		
 		});
 	} else if (thisProj.click == "add") {
-		$(chip).unbind("click");
-		$(chip).click(function(event) {
+		$(chip).off("dblclick");
+		$(chip).dblclick(function(event) {
 			clickChip( event.target );		
 		});
 	} else if (thisProj.click == "none") {
-		$(chip).unbind("click");
+		$(chip).off("dblclick");
 	}
+}
+
+function editChip(chip) {
+	chipBeingEdited = chip;
+	editProject(priorityChips[chip.id].projectID);
 }
 
 function clickChip( chip ) {
@@ -149,7 +157,7 @@ function clearPriorityTable() {
 	resetTable();
 	
 	// reactivate the "Add Row" button
-	$("#addRowButton").unbind("click");
+	$("#addRowButton").off("click");
 	$("#addRowButton").click(function(event) {
 			clickAddRow();		
 	});

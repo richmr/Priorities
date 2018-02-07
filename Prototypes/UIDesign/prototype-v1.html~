@@ -277,7 +277,7 @@
 								<div class="col s12">Task list</div>
         					</div>
         					<div id="editProject-TaskList">
-	        					<div class="row valign-wrapper">
+	        					<div id="task-1" class="row valign-wrapper">
 									<div class="input-field col s2">
 										<input placeholder="Who" id="task-1-who" type="text">
 	          						<!-- <label for="task-1-who">Who</label> -->

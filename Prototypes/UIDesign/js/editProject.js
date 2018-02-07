@@ -14,33 +14,33 @@ function initializeEditProject() {
   });
   
   // Activate buttons:
-  $("#addANote").unbind("click");
+  $("#addANote").off("click");
 	$("#addANote").click(function(event) {
 		clickaddANote();		
 	});
 	
-	$("#saveProjectData").unbind("click");
+	$("#saveProjectData").off("click");
 	$("#saveProjectData").click(function(event) {
 		clicksaveProjectData();		
 	});
 	
-	$("#cancelProjectData").unbind("click");
+	$("#cancelProjectData").off("click");
 	$("#cancelProjectData").click(function(event) {
 		clickcancelProjectData();		
 	});
 	
-	$("#cancelProjectNotes").unbind("click");
+	$("#cancelProjectNotes").off("click");
 	$("#cancelProjectNotes").click(function(event) {
 		clickcancelProjectNotes();		
 	});
 	
-	$("#saveProjectNotes").unbind("click");
+	$("#saveProjectNotes").off("click");
 	$("#saveProjectNotes").click(function(event) {
 		clicksaveProjectNotes();		
 	});
 	
   // open the modal - this was for testing and design
-  $("#editProjectModal").modal("open");
+  //$("#editProjectModal").modal("open");
 }
 
 function clickaddANote() {
@@ -52,10 +52,38 @@ function clickaddANote() {
 }
 
 function clicksaveProjectData() {
-	// open the modal - this was for testing and design
-  $("#editProjectModal").modal("close");	
+  // Save basic data
+  	projects[editProjectID]["title"] = $("#editProject-Title").val();
+	projects[editProjectID]["goal"] = $("#editProject-goal").val();
 	
-	// Set the note to current data	
+	if ($("#status-green").prop("checked")) {
+		projects[editProjectID]["status"]="chip-status-green";	
+	} else if ($("#status-yellow").prop("checked")) {
+		projects[editProjectID]["status"]="chip-status-yellow";	
+	} else if ($("#status-red").prop("checked")) {
+		projects[editProjectID]["status"]="chip-status-red";	
+	}
+	
+	// Iterate over tasks, we can use the nextTaskID stored in editProject-TaskList to make this easier
+	var numtasks = $("#editProject-TaskList").data("nextTaskID");
+	
+	// delete the current tasks for this project
+	projects[editProjectID]["tasks"] = [];
+	for (i = 1; i < numtasks; i++) {
+		var taskobj = {};
+		var taskpre = "#task-"+i;
+		// I only add incomplete tasks to the data
+		if (!$(taskpre+"-done").prop("checked")) {
+			taskobj["who"] = $("#task-"+i+"-who").val();
+			taskobj["what"] = $("#task-"+i+"-what").val();
+			taskobj["when"] = $("#task-"+i+"-when").val();
+			projects[editProjectID]["tasks"].push(taskobj);
+		}			
+	}
+	
+	// Notes should have already been saved by the "Save" button on the save modal
+	updatePriorityChip(chipBeingEdited);
+	$("#editProjectModal").modal("close");	
 }
 
 function clickcancelProjectData() {
@@ -69,7 +97,8 @@ function clickcancelProjectData() {
 function clickcancelProjectNotes() {
 	// By design, no changes are made to the actual underlying data until "save" is clicked.
 	// So just close the modal.
-  $("#editProjectModal").modal("close");
+	$("#projectNoteField").val("");
+  $("#addANoteModal").modal("close");
 }
 
 function clicksaveProjectNotes() {
@@ -118,7 +147,7 @@ function editProject(projID, newProject=false) {
 	$("#editProject-TaskList").html(addTaskButtonHTML());
 	
 	// Activate the button
-	$("#editProject-addTaskButton").unbind("click");
+	$("#editProject-addTaskButton").off("click");
 	$("#editProject-addTaskButton").click(function(event) {
 		clickaddTaskButton();		
 	});
@@ -128,11 +157,16 @@ function editProject(projID, newProject=false) {
 	
 	// Iterate
 	$.each(tasks, function( index, value ) {
+		  console.log("Adding task: :" + value);
 		  addTaskRow(value);
+		  
 	});
 	 
 	 // Set the note data
 	 $("#projectNoteField").val(note);
+	 
+	// Needed to reset text fields
+	Materialize.updateTextFields();	 
 	 
 	 // Open the modal
 	 $("#editProjectModal").modal("open");
@@ -164,10 +198,10 @@ function newTaskWho(taskID, who=false) {
 
 function newTaskWhat(taskID, what=false) {
 	var htmlstring = '<div class="input-field col s5">';
-	if (who) {
+	if (what) {
 		htmlstring += '<input placeholder="What" id="task-'+taskID+'-what" type="text" value="'+what+'">';
 	} else {
-		htmlstring += '<input placeholder="What" id="task-'+taskID+'-What" type="text">';
+		htmlstring += '<input placeholder="What" id="task-'+taskID+'-what" type="text">';
 	}
 	htmlstring += '</div>';
 	return htmlstring;
@@ -175,7 +209,7 @@ function newTaskWhat(taskID, what=false) {
 
 function newTaskWhen(taskID, when=false) {
 	var htmlstring = '<div class="input-field col s3">';
-	if (who) {
+	if (when) {
 		htmlstring += '<input placeholder="When" id="task-'+taskID+'-when" type="text" value="'+when+'">';
 	} else {
 		htmlstring += '<input placeholder="When" id="task-'+taskID+'-when" type="text">';
@@ -202,9 +236,9 @@ function addTaskRow(taskObj = false) {
 	var htmlstring = newTaskHeaderHTML(taskID);
 	var who, what, when;
 	if (taskObj) {
-		who = taskObj["Who"];
-		what = taskObj["What"];
-		when = taskObj["When"];		
+		who = taskObj["who"];
+		what = taskObj["what"];
+		when = taskObj["when"];		
 	}
 	
 	htmlstring += newTaskWho(taskID, who);
@@ -214,6 +248,16 @@ function addTaskRow(taskObj = false) {
 	htmlstring += newTaskFooter(taskID);
 	
 	$("#editProject-taskListEnd").before(htmlstring);
+
+	// Activate the date picker
+	$("#task-"+taskID+"-when").pickadate({
+	    selectMonths: true, // Creates a dropdown to control month
+	    selectYears: 5, // Creates a dropdown of 15 years to control year,
+	    today: 'Today',
+	    clear: 'Clear',
+	    close: 'Ok',
+	    closeOnSelect: true // Close upon selecting a date,
+  });
 	
 	// increment the nextTaskID
 	$("#editProject-TaskList").data("nextTaskID", taskID+1);
