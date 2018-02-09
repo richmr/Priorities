@@ -99,7 +99,8 @@
 			<div class="col s2">
 				<br>
 				<!-- <div class="valign-wrapper">Username <i class="small material-icons">arrow_drop_down</i><br><br></div> -->
-				<div id="priority-chipStage" class="chip"></div><br><br>				
+					<div id="priority-chipStage" class="chip"></div>
+				<br><br>
 				<a class="waves-effect" href="#!">
 					<i id="archive" class="small material-icons action-icons" style="font-size: 3rem; color: black;">archive</i>
 				</a>
@@ -177,7 +178,16 @@
 "doneProjects": [],
 "graveyardProjects":[],
 "projects": { "0": {"title":" ", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"none"},
-						"1": {"title":"Extreme 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
+						"1": 
+							{"title":"Edit this one", 
+							"status":"chip-status-red", 
+							"draggable":true, 
+							"droppable":false, 
+							"click":"details",
+							"goal":"",
+							"tasks":[{"who":"Bob", "what":"Be your uncle", "when":""}],
+							"note":""
+							},
 						"2": {"title":"Extreme 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
 						"3": {"title":"High 1", "status":"chip-status-yellow", "draggable":true, "droppable":false, "click":"details"},
 						"4": {"title":"High 2", "status":"chip-status-green", "draggable":true, "droppable":false, "click":"details"},
@@ -187,9 +197,10 @@
 						"8": {"title":"Stored 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
 						"15": {"title":"Archived 1", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
 						"20": {"title":"Archived Too", "status":"chip-status-red", "draggable":true, "droppable":false, "click":"details"},
-						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"}
+						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"},
+						"nextProjID":"21"
 					},
-"portfolios":{"name":"Bobs My Uncle"},
+"portfolios":{"name":"Click to Change"},
 "priorityRowData":{ "categories":["Extreme", "High", "Med", "Low"],
 								"nextRowID":2,
 								"rows":{"1":{"name":"Do this stuff", "slots":2}}
@@ -322,7 +333,28 @@
 				   <a id="cancelProjectNotes" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
 			    </div>
 		    </div>
-				
+			
+			<!-- Edit Table Row name modal -->		    
+		    <div id="editTableRowModal" class="modal">
+				<div id="editTableRowModal-content" class="modal-content">
+			      <span id="editTableRowModal-header"><h5>Change/Delete Table Row:</h5></span>
+			      <div class="row">
+    					<form action="#" class="col s12">
+    						<div class="row">
+        						<div class="input-field col s12">
+        							<input placeholder="Enter row owner here" id="editTableRow-Title" type="text" >
+          						<label for="editTableRow-Title">Row Owner</label> -->
+        						</div>
+        					</div>
+        				</form>
+        			</div>
+			   </div>
+			    <div id="editTableRowModal-footer" class="modal-footer">
+			    	<a id="saveTableRow" href="#!" class="waves-effect waves-green btn green">Save Name</a>
+			    	<a id="deleteTableRow" href="#!" class="waves-effect waves-green btn red">Delete Row</a>
+				   <a id="cancelTableRow" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
+			    </div>
+		    </div>	
 			
 		</div>
 	<script type="text/javascript" src="js/globalVars.js"></script>

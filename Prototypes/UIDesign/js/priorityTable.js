@@ -50,9 +50,9 @@ function updatePriorityChip( chip ) {
 			editChip( event.target );		
 		});
 	} else if (thisProj.click == "add") {
-		$(chip).off("dblclick");
-		$(chip).dblclick(function(event) {
-			clickChip( event.target );		
+		$(chip).off("click");
+		$(chip).click(function(event) {
+			newChip( event.target );		
 		});
 	} else if (thisProj.click == "none") {
 		$(chip).off("dblclick");
@@ -64,12 +64,28 @@ function editChip(chip) {
 	editProject(priorityChips[chip.id].projectID);
 }
 
+function newChip(chip) {
+	chipBeingEdited = chip;  
+	editProject(projects["nextProjID"], true);  // true for newProject
+}
+
 function clickChip( chip ) {
 	console.log(`id: ${chip.id} clicked`);
 }
 
+function clickOnRowName(chip) {
+	var rowID = $(chip).data("rowID");
+	
+}
+
 function initializeTableRow(rowID) {
-	// This initializes a whole row on the table, setting all necessary handlers
+	// Initialize the ability to click the name and set a data field on the name
+	$("#row-"+rowID+"-name").click(function(event) {
+			editTableRow(rowID);		
+		}).data("rowID", rowID);
+		
+	
+	// This initializes all the chips in a row on the table, setting all necessary handlers
 	$('div[id^="priority-row-'+rowID+'"]' ).each(function( index ) {
 		initializeTableChip(this);
 	});
@@ -139,6 +155,11 @@ function initializePriorityTable() {
  			initializeTableChip(this);
 		});
 		firstTableInit = false;
+	} else {
+		// Still need to at least update this chip
+		$("#priority-chipStage").each(function( index ) {
+ 			updatePriorityChip(this);
+		});
 	}	
 	
 	// Reset the portfolio title
@@ -221,6 +242,7 @@ function initializePriorityTable_old() {
     // Now establish the actual chip values
 	$('div[id^="priority"]' ).each(function( index ) {
 		//console.log("Setting up a chip");
+		$( this ).disableSelection();
 	  	updatePriorityChip(this);
 	});
 }

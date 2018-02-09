@@ -23,7 +23,8 @@ var graveyardProjects = [];
 
 								
 var projects = { "0": {"title":" ", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"none"},
-						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"}
+						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"},
+						"nextProjID":"1"
 					};
 
 function consolidateData() {

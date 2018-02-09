@@ -73,9 +73,9 @@ function deleteRowFromTable(rowID, protectProjects = true) {
 	// if protectProjects, then pops an alert if there are projects still assigned on the row
 	if (protectProjects) {
 		var projectsDetected = false;
-		$('div[id^="priority-row-'+rowID+'"]' ).each(function( index ) {
+		$('div[id^="priority-row-'+rowID+'"]' ).each(function( index, value ) {
 			// Test what the projectID for this DOM element is
-			if (priorityChips[this.id] != 0) {
+			if (priorityChips[value.id]["projectID"] != 0) {
 				projectsDetected = true;
 			}
 		});

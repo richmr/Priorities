@@ -52,6 +52,18 @@ function clickaddANote() {
 }
 
 function clicksaveProjectData() {
+	// if this is a new project, then we need to create the object and increment the projID
+	if (editNewProject) {
+		projects[editProjectID] = {};
+		projects[editProjectID]["draggable"] = true;
+		projects[editProjectID]["droppable"] = true;
+		projects[editProjectID]["click"] = "details";
+		// Set priorityChips
+		priorityChips["priority-chipStage"].projectID = editProjectID;
+		// increment nextProjID
+		projects["nextProjID"] = editProjectID + 1;
+	}
+	
   // Save basic data
   	projects[editProjectID]["title"] = $("#editProject-Title").val();
 	projects[editProjectID]["goal"] = $("#editProject-goal").val();
@@ -82,7 +94,11 @@ function clicksaveProjectData() {
 	}
 	
 	// Notes should have already been saved by the "Save" button on the save modal
-	updatePriorityChip(chipBeingEdited);
+	if (editNewProject) {
+		updatePriorityChip($("#priority-chipStage")[0]);
+	} else {				
+		updatePriorityChip(chipBeingEdited);
+	}
 	$("#editProjectModal").modal("close");	
 }
 

@@ -6,7 +6,7 @@ $(document).ready(function(){
 	newData();
 	initializeSaveData();
 	initializeLoadData();
-	//initializeEditProject();
+	initializeEditProject();
 });
 
 function newData() {
