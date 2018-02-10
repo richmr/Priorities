@@ -48,4 +48,5 @@ function editTableRow(rowID) {
 	editRowID = rowID;
 	$("#editTableRow-Title").val(priorityRowData["rows"][rowID]["name"]);
 	$("#editTableRowModal").modal("open");
+	$("#editTableRow-Title").focus();
 }

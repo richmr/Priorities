@@ -7,6 +7,7 @@ $(document).ready(function(){
 	initializeSaveData();
 	initializeLoadData();
 	initializeEditProject();
+	initializeEditTableRow();
 });
 
 function newData() {

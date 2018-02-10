@@ -337,13 +337,13 @@
 			<!-- Edit Table Row name modal -->		    
 		    <div id="editTableRowModal" class="modal">
 				<div id="editTableRowModal-content" class="modal-content">
-			      <span id="editTableRowModal-header"><h5>Change/Delete Table Row:</h5></span>
+			      <span id="editTableRowModal-header"><h5>Edit a table row:</h5></span>
 			      <div class="row">
     					<form action="#" class="col s12">
     						<div class="row">
         						<div class="input-field col s12">
         							<input placeholder="Enter row owner here" id="editTableRow-Title" type="text" >
-          						<label for="editTableRow-Title">Row Owner</label> -->
+          						<label for="editTableRow-Title">Row Owner</label>
         						</div>
         					</div>
         				</form>
@@ -354,7 +354,28 @@
 			    	<a id="deleteTableRow" href="#!" class="waves-effect waves-green btn red">Delete Row</a>
 				   <a id="cancelTableRow" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
 			    </div>
-		    </div>	
+		    </div>
+		    
+		    <!-- Edit Portfolio  modal -->		    
+		    <div id="editPortfolioDataModal" class="modal">
+				<div id="editPortfolioDataModal-content" class="modal-content">
+			      <span id="editPortfolioDataModal-header"><h5>Change portfolio data:</h5></span>
+			      <div class="row">
+    					<form action="#" class="col s12">
+    						<div class="row">
+        						<div class="input-field col s12">
+        							<input placeholder="Portfolio Name" id="editPortfolioName" type="text" >
+          						<label for="editPortfolioName">Portfolio Name</label>
+        						</div>
+        					</div>
+        				</form>
+        			</div>
+			   </div>
+			    <div id="editTableRowModal-footer" class="modal-footer">
+			    	<a id="savePortfolioData" href="#!" class="waves-effect waves-green btn green">Save</a>
+				   <a id="cancelPortfolioData" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
+			    </div>
+		    </div>		
 			
 		</div>
 	<script type="text/javascript" src="js/globalVars.js"></script>
@@ -371,6 +392,8 @@
 	<script type="text/javascript" src="js/editTableRow.js"></script>
 	<!-- <script type="text/javascript" src="js/testdata.js"></script> -->
 	<script type="text/javascript" src="js/editProject.js"></script>	
+	<script type="text/javascript" src="js/portfolioEdit.js"></script>	
+	<script type="text/javascript" src="js/lodash.core.js"></script>	
 	<script type="text/javascript" src="js/prioritiesStartup.js"></script>	
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<!-- </div> -->

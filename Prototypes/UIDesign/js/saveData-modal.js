@@ -13,6 +13,8 @@ function clickOnSaveData () {
 	$("#saveDataModal").modal('open');
 	var allData = consolidateData();
 	$("#saveDataField").val(JSON.stringify(allData));
+	$("#saveDataField").focus();
+	$("#saveDataField").select();
 }
 
 

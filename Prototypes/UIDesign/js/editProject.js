@@ -39,6 +39,14 @@ function initializeEditProject() {
 		clicksaveProjectNotes();		
 	});
 	
+	// Enable "Enter" detection on the project name field (same as "Save")
+	$("#editProject-Title").off("keypress");
+	$("#editProject-Title").keypress(function(e) {
+	    var keycode = (e.keyCode ? e.keyCode : e.which);
+	    if (keycode == '13') {
+	        clicksaveProjectData();
+	    }
+	});	
   // open the modal - this was for testing and design
   //$("#editProjectModal").modal("open");
 }
@@ -48,7 +56,8 @@ function clickaddANote() {
 	$("#projectNoteField").val(projects[editProjectID]["note"]);
 	
 	// open the modal - this was for testing and design
-  $("#addANoteModal").modal("open");	
+  $("#addANoteModal").modal("open");
+  $("#projectNoteField").focus();	
 }
 
 function clicksaveProjectData() {
@@ -186,6 +195,7 @@ function editProject(projID, newProject=false) {
 	 
 	 // Open the modal
 	 $("#editProjectModal").modal("open");
+	 $("#editProject-Title").focus();
 }
 
 function addTaskButtonHTML() {

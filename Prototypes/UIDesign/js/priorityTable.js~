@@ -81,7 +81,7 @@ function clickOnRowName(chip) {
 function initializeTableRow(rowID) {
 	// Initialize the ability to click the name and set a data field on the name
 	$("#row-"+rowID+"-name").click(function(event) {
-			newChip( event.target );		
+			editTableRow(rowID);		
 		}).data("rowID", rowID);
 		
 	
