@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="css/dynamic-chips.css"/>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	 
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<meta charset="utf-8" />
+<title>Priorities-MVP</title>
+</head>
+<body>
+	<!-- <div class="container"> -->
+		<!-- Everything should be in a single row.. -->
+		<div class="row">
+			<!-- Main page area -->
+			<!-- Left bar area/spacer -->
+			<div class="col s1">
+			</div>
+			<!-- Top action bar over the main table -->
+			<div class="col s9">
+				<br><br>
+				<div class="col s2 valign-wrapper">
+					<!-- <i class="small material-icons">undo</i>
+					<i class="small material-icons">redo</i>	 -->	
+				</div>
+				<div class="col s3 offset-s2 valign-wrapper">
+					<span id="portfolioName">Portfolio Title</span>  <!-- <i class="small material-icons">arrow_drop_down</i> -->
+				</div>
+				<div class="col s2 offset-s3 valign-wrapper">
+					<a class="waves-effect" href="#!">
+						<i id="load_data" class="small material-icons action-icons" style="padding-right:5px">folder_open</i>
+					</a>
+					<a class="waves-effect" href="#!">
+						<i id="save_data" class="small material-icons action-icons">save</i>
+					</a>
+				</div>
+				<!-- Priorities table should start here -->
+					<br>
+					<table class="striped">
+						<thead>
+							<tr>
+								<th> </th>
+								<th>Extreme</th>
+								<th>High   </th>
+								<th>Medium </th>
+								<th>Low    </th>
+							</tr>
+						</thead>
+						<tbody id="priorityTableDynamicContent">
+							<!-- <tr>
+								<td id="row-1-name">Person 1</td>
+								<td>
+									<ul id="sortable-row1-1" class="row1Priorities">
+										<li><div id="priority-row-1-spot-1" class="chip" ></div></li>
+										<li><div id="priority-row-1-spot-2" class="chip" ></div></li>
+									</ul>
+								</td>
+								<td>
+									<ul id="sortable-row1-2" class="row1Priorities">
+										<li><div id="priority-row-1-spot-3" class="chip" ></div></li>
+										<li><div id="priority-row-1-spot-4" class="chip" ></div></li>
+									</ul>
+								</td>
+								<td>
+									<ul id="sortable-row1-3" class="row1Priorities">
+										<li><div id="priority-row-1-spot-5" class="chip" ></div></li>
+										<li><div id="priority-row-1-spot-6" class="chip" ></div></li>
+									</ul>
+								</td>
+								<td>
+									<ul id="sortable-row1-4" class="row1Priorities">
+										<li><div id="priority-row-1-spot-7" class="chip" ></div></li>
+										<li><div id="priority-row-1-spot-8" class="chip" ></div></li>
+									</ul>
+								</td>
+							</tr> -->
+							<!-- End of table content, "Add Row" next -->
+							<tr id="lastTableRow">
+								<td>
+									<a class="waves-effect" href="#!">
+										<i id="addRowButton" class="small material-icons" style="font-size: 2rem">add_circle_outline</i>
+									</a>
+								</td>
+							</tr>
+						</tbody>					
+					</table>
+					
+									
+			</div>
+			
+			<!-- Side menu -->
+			<div class="col s2">
+				<br>
+				<!-- <div class="valign-wrapper">Username <i class="small material-icons">arrow_drop_down</i><br><br></div> -->
+					<div id="priority-chipStage" class="chip"></div>
+				<br><br>
+				<a class="waves-effect" href="#!">
+					<i id="archive" class="small material-icons action-icons" style="font-size: 3rem; color: black;">archive</i>
+				</a>
+				<span id="archive-count">0</span> idle projects
+				<!-- <span class="new badge badge-left" data-badge-caption="idle projects">4</span> -->
+				<br><br>
+				<a class="waves-effect" href="#!">
+					<i id="doneProjects" class="small material-icons action-icons" style="font-size: 3rem; color: black;">sentiment_very_satisfied</i>
+				</a>
+				<span id="doneProjects-count">0</span> done projects
+				<br><br>
+				<a class="waves-effect" href="#!">
+					<i id="graveyard" class="small material-icons action-icons" style="font-size: 3rem; color: black;" >delete_forever</i>
+				</a>
+				<span id="graveyard-count">0</span> discarded projects
+				<br><br>
+			</div>
+			
+			<!-- Archive Modal Definition -->
+			<div id="archiveModal" class="modal">
+				<div id="archiveModal-content" class="modal-content">
+			      <span id="archiveModal-header"><h5>Click a project to return it to Priorities Table</h5></span>
+			      <div id="archivePool">
+			      <!-- Chips added here  -->
+			      </div>     
+			    </div>
+			    <div class="modal-footer">
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		
+			<!-- doneProjects Modal Definition -->
+			<div id="doneProjectsModal" class="modal">
+				<div id="doneProjectsModal-content" class="modal-content">
+			      <span id="doneProjectsModal-header"><h5>Double click a project to return it to Priorities Table</h5></span>
+			      <div id="doneProjectsPool">
+			      <!-- Chips added here  -->
+			      </div>     
+			    </div>
+			    <div class="modal-footer">
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		    
+		    <!-- graveyard Modal Definition -->
+			<div id="graveyardModal" class="modal">
+				<div id="graveyardModal-content" class="modal-content">
+			      <span id="graveyardModal-header"><h5>Double click a project to return it to Priorities Table</h5></span>
+			      <div id="graveyardPool">
+			      <!-- Chips added here  -->
+			      </div>     
+			    </div>
+			    <div class="modal-footer">
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		    
+		    <!-- Load Modal Definition -->
+			<div id="loadDataModal" class="modal">
+				<div id="loadDataModal-content" class="modal-content">
+			      <span id="loadDataModal-header"><h5>Load Priorities Data</h5></span>
+			      <div id="loadDataModal-message">Paste your data below</div>
+			      <textarea id="loadDataField" class="load-modal">
+					</textarea>
+			    </div>
+			    <div class="modal-footer">
+			    		<a href="#!" id="updateData" class="waves-effect waves-green btn-flat">Update</a>
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		    
+			<!-- Data load results modal -->		    
+		    <div id="dataAnalysisModal" class="modal">
+				<div id="dataAnalysisModal-content" class="modal-content">
+			      <span id="dataAnalysisModal-header"><h5>Examining your data..</h5></span>
+			      <ul class="collection" id="dataAnalysis-collection">
+			      	<li class="collection-item" id="dataAnalysis-jsoncheck"><div>Data properly formatted..<span class="secondary-content"><i id="dataAnalysis-jsoncheck-check" class="material-icons grey-text">check_circle</i></span></div></li>
+			      </ul>
+			      <div class="progress">
+      				<div id="dataAnalysisModal-progress" class="indeterminate"></div>
+  					</div>
+			    </div>
+			    <div id="dataAnalysisModal-footer" class="modal-footer">
+			    	<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		    
+		    <!-- Save Modal Definition -->
+			<div id="saveDataModal" class="modal save-modal">
+				<div id="saveDataModal-content" class="modal-content">
+			      <span id="saveDataModal-header"><h5>Save Data</h5></span>
+			      <div id="saveDataModal-message">Your data has been saved to this computer.<br>
+			      But I suggest you copy the information below to a separate document for safe keeping too.
+			      </div>
+			      <textarea id="saveDataField" class="save-modal" readonly>
+			      </textarea>     
+			    </div>
+			    <div class="modal-footer">
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		    
+		    <!-- saveProjects Modal Definition -->
+			<div id="saveProjectsModal" class="modal">
+				<div id="saveProjectsModal-content" class="modal-content">
+			      <span id="saveProjectsModal-header"><h5>Can't delete this row</h5></span>
+			      There are projects still owned by <span id="saveProjectsModal-rowname">this row</span>.  Please re-assign, archive, complete or delete these projects before continuing!    
+			    </div>
+			    <div class="modal-footer">
+				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			    </div>
+		    </div>
+		    
+		    <!-- Edit Project Modal Definition -->
+			<div id="editProjectModal" class="modal">
+				<div id="editProjectModal-content" class="modal-content">
+			      <span id="editProjectModal-header"><h5><span id="newOrEditProject">Edit</span> Project</h5></span>
+			      <div class="row">
+    					<form action="#" class="col s12">
+    						<div class="row">
+        						<div class="input-field col s12">
+        							<input placeholder="Enter project title here" id="editProject-Title" type="text" >
+          						<!-- <label for="editProject-Title">Project Title</label> -->
+        						</div>
+        					</div>
+        					<div class="row valign-wrapper">
+        						<div class="col s1">Goal:</div>
+        						<div class="col s3">
+	        						<input placeholder="When" id="editProject-goal" type="text" class="datepicker">
+        						</div>
+        						<div class="col s2 right-align">Status:</div>
+        						<div class="col s2 center-align chip-status-green">
+        							<input class="with-gap" name="editProject-status" type="radio" id="status-green" checked >
+        							<label for="status-green">Green</label>
+      						</div>
+      						<div class="col s2 center-align chip-status-yellow">
+        							<input class="with-gap" name="editProject-status" type="radio" id="status-yellow">
+        							<label for="status-yellow">Yellow</label>
+      						</div>
+								<div class="col s2 center-align chip-status-red">
+        							<input class="with-gap" name="editProject-status" type="radio" id="status-red">
+        							<label for="status-red">Red</label>
+      						</div>
+        					</div>
+        					<div class="row">
+								<div class="col s12">Task list</div>
+        					</div>
+        					<div id="editProject-TaskList">
+	        					<div id="task-1" class="row valign-wrapper">
+									<div class="input-field col s2">
+										<input placeholder="Who" id="task-1-who" type="text">
+	          						<!-- <label for="task-1-who">Who</label> -->
+	          					</div>
+	          					<div class="input-field col s5">
+										<input placeholder="What" id="task-1-what" type="text">
+	          						<!-- <label for="task-1-what">What</label> -->
+	          					</div>
+	          					<div class="input-field col s3">
+										<input placeholder="When" id="task-1-when" type="text" class="datepicker">
+	          						<!-- <label for="task-1-when">When</label> -->
+	          					</div>
+	          					<div class="col s1">
+										<input type="checkbox" class="filled-in" id="task-1-done">
+										<label for="task-1-done"> </label>
+	          					</div>		
+	        					</div>
+	        					<div class="row" id="editProject-taskListEnd">
+	        						<a class="waves-effect" href="#!">
+										<i id="editProject-addTaskButton" class="small material-icons">add_circle_outline</i>
+									</a>
+								</div>
+        					</div>
+        				</form>
+			    </div>
+			    <div class="modal-footer">
+				     <a id="addANote" href="#!" class="waves-effect waves-green btn-flat">Notes</a>
+				      <a id="saveProjectData" href="#!" class="waves-effect waves-green btn-flat">Save</a>
+				      <a id="cancelProjectData" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
+			    </div>
+		    </div>
+		  </div>					
+		
+			<!-- Project notes modal -->		    
+		    <div id="addANoteModal" class="modal">
+				<div id="addANoteModal-content" class="modal-content">
+			      <span id="addANoteModal-header"><h5>Notes for this project:</h5></span>
+			      <textarea id="projectNoteField" class="load-modal"></textarea>
+			   </div>
+			    <div id="addANoteModal-footer" class="modal-footer">
+			    	<a id="saveProjectNotes" href="#!" class="waves-effect waves-green btn-flat">Save</a>
+				   <a id="cancelProjectNotes" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
+			    </div>
+		    </div>
+			
+			<!-- Edit Table Row name modal -->		    
+		    <div id="editTableRowModal" class="modal">
+				<div id="editTableRowModal-content" class="modal-content">
+			      <span id="editTableRowModal-header"><h5>Edit a table row:</h5></span>
+			      <div class="row">
+    					<form action="#" class="col s12">
+    						<div class="row">
+        						<div class="input-field col s12">
+        							<input placeholder="Enter row owner here" id="editTableRow-Title" type="text" >
+          						<label for="editTableRow-Title">Row Owner</label>
+        						</div>
+        					</div>
+        				</form>
+        			</div>
+			   </div>
+			    <div id="editTableRowModal-footer" class="modal-footer">
+			    	<a id="saveTableRow" href="#!" class="waves-effect waves-green btn green">Save Name</a>
+			    	<a id="deleteTableRow" href="#!" class="waves-effect waves-green btn red">Delete Row</a>
+				   <a id="cancelTableRow" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
+			    </div>
+		    </div>
+		    
+		    <!-- Edit Portfolio  modal -->		    
+		    <div id="editPortfolioDataModal" class="modal">
+				<div id="editPortfolioDataModal-content" class="modal-content">
+			      <span id="editPortfolioDataModal-header"><h5>Change portfolio data:</h5></span>
+			      <div class="row">
+    					<form action="#" class="col s12">
+    						<div class="row">
+        						<div class="input-field col s12">
+        							<input placeholder="Portfolio Name" id="editPortfolioName" type="text" >
+          						<label for="editPortfolioName">Portfolio Name</label>
+        						</div>
+        					</div>
+        				</form>
+        			</div>
+			   </div>
+			    <div id="editTableRowModal-footer" class="modal-footer">
+			    	<a id="savePortfolioData" href="#!" class="waves-effect waves-green btn green">Save</a>
+				   <a id="cancelPortfolioData" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
+			    </div>
+		    </div>		
+			
+		</div>
+	<script type="text/javascript" src="js/globalVars.js"></script>
+	<script type="text/javascript" src="js/priorityTable.js"></script>
+	<script type="text/javascript" src="js/archive.js"></script>
+	<script type="text/javascript" src="js/doneProjects.js"></script>
+	<script type="text/javascript" src="js/graveyard.js"></script>
+	<script type="text/javascript" src="js/dataManagement.js"></script>
+	<script type="text/javascript" src="js/loadData-modal.js"></script>
+	<script type="text/javascript" src="js/saveData-modal.js"></script>
+	<script type="text/javascript" src="js/tableGen.js"></script>
+	<script type="text/javascript" src="js/editTableRow.js"></script>
+	<script type="text/javascript" src="js/editProject.js"></script>	
+	<script type="text/javascript" src="js/portfolioEdit.js"></script>	
+	<script type="text/javascript" src="js/lodash.core.js"></script>	
+	<script type="text/javascript" src="js/prioritiesStartup.js"></script>	
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+</html>

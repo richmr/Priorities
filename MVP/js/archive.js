@@ -121,7 +121,6 @@ function saveArchive() {
 	$('div[id^="archivePool-"]').each( function (index) {
 		archivedProjects.push($(this).data("projectID"));
 	});
-	dataChanged("archivedProjects");
 }
 
 function clearArchive() {

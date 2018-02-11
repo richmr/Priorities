@@ -29,6 +29,7 @@ function clicksaveTableRow() {
 	priorityRowData["rows"][editRowID]["name"] = $("#editTableRow-Title").val();
 	
 	$("#editTableRowModal").modal("close");
+	dataChanged("priorityRowData");
 }
 
 function clickdeleteTableRow() {
@@ -48,4 +49,5 @@ function editTableRow(rowID) {
 	editRowID = rowID;
 	$("#editTableRow-Title").val(priorityRowData["rows"][rowID]["name"]);
 	$("#editTableRowModal").modal("open");
+	$("#editTableRow-Title").focus();
 }

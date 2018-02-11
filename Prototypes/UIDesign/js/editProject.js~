@@ -108,7 +108,8 @@ function clicksaveProjectData() {
 	} else {				
 		updatePriorityChip(chipBeingEdited);
 	}
-	$("#editProjectModal").modal("close");	
+	$("#editProjectModal").modal("close");
+	dataChanged();	
 }
 
 function clickcancelProjectData() {
@@ -128,6 +129,7 @@ function clickcancelProjectNotes() {
 
 function clicksaveProjectNotes() {
 	  projects[editProjectID]["note"] = $("#projectNoteField").val();
+	  dataChanged("projects");
   $("#addANoteModal").modal("close");	
 }
 
@@ -182,7 +184,7 @@ function editProject(projID, newProject=false) {
 	
 	// Iterate
 	$.each(tasks, function( index, value ) {
-		  console.log("Adding task: :" + value);
+		  //console.log("Adding task: :" + value);
 		  addTaskRow(value);
 		  
 	});

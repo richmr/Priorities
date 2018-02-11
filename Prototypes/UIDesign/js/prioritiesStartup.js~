@@ -1,5 +1,9 @@
 $(document).ready(function(){
 	 // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+	$( window ).unload(function() {
+		  return exitPriorities();
+		});	
+	
 	$('.modal').modal();    
 	
 	//initializeData();
@@ -11,7 +15,7 @@ $(document).ready(function(){
 });
 
 function newData() {
-	console.log("newData() running.");	
+	//console.log("newData() running.");	
 	clearHTML();
 	initializePortfolio();
 	initializePriorityTable();
@@ -28,5 +32,13 @@ function clearHTML() {
 	clearDoneProjects();
 	clearGraveyard();
 }
-  
+
+function exitPriorities() {
+	// An attempt to save the data when the user leaves the page, or the window closes
+	saveArchive();
+	saveGraveyard();
+	saveDone();
+	saveAllData();
+	return "Priorities data saved."; 
+	 
 console.log("prioritiesStartup loaded");
