@@ -11,6 +11,7 @@ $(document).ready(function(){
 });
 
 function newData() {
+	console.log("newData() running.");	
 	clearHTML();
 	initializePortfolio();
 	initializePriorityTable();

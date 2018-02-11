@@ -140,7 +140,18 @@ function initializeLoadData() {
 }	
 
 function clickOnLoadData () {
-	// Open the modal
+	// Check for saved data
+	if (wasDataSaved()) {
+		// Get all of the saved data
+		loadAllData();
+		var savedData = makeAllDataJSON();
+		// Set the text area
+		$("#loadDataField").val(JSON.stringify(savedData));
+		// Set the message
+		$("#loadDataModal-message").html("I found data saved to your computer.  If you want to use this data, simply click Update.<br>If not, paste your data below and then click Update");
+	} else {
+		$("#loadDataModal-message").html("Please paste your data below and then click Update");
+	}
 	$("#loadDataModal").modal('open');
 }
 

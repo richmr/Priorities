@@ -26,6 +26,7 @@ var projects = { "0": {"title":" ", "status":"chip-placeholder", "draggable":fal
 						"stage": {"title":"Click to add project", "status":"chip-black", "draggable":false, "droppable":false, "click":"add"},
 						"nextProjID":"1"
 					};
+var prioritiesDataSaved = true;
 
 function consolidateData() {
 	// Returns a consolidated JSON object with all data
@@ -34,17 +35,7 @@ function consolidateData() {
 	saveGraveyard();
 	saveDone();
 	
-	var allData = {};
-	allData["portfolios"] = portfolios;
-	allData["priorityRowData"] = priorityRowData;
-	allData["people"] = people;
-	allData["priorityChips"] = priorityChips;
-	allData["archivedProjects"] = archivedProjects;
-	allData["doneProjects"] = doneProjects;
-	allData["graveyardProjects"] = graveyardProjects;
-	allData["projects"] = projects;
-	
-	return allData;
+	return makeAllDataJSON();
 }
 
 console.log("Global vars loaded.");

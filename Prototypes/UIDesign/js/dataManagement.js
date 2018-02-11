@@ -9,6 +9,8 @@ var keyGlobalVars = [
 	"projects"
 	];
 
+var savedDataFlag = "prioritiesDataSaved";
+
 var lastKnownState = {};
 
 function dataChanged(hint=false) {
@@ -28,12 +30,50 @@ function dataChanged(hint=false) {
 				lastKnownState[aGlobalVar] = window[aGlobalVar];
 				saveData(aGlobalVar);
 			}		
-		}
+		});
 	}	
+}
+
+function saveAllData() {
+	$.each(keyGlobalVars, function (key, aGlobalVar) {
+		saveData(aGlobalVar);
+	});
+	localStorage.setItem(savedDataFlag, true);
 }
 
 function saveData(objToSave) {
 	// Just storing in localStorage for now.	
-	localStorage.setItem(objToSave, JSON.stringify(window[objToSave]);
+	localStorage.setItem(objToSave, JSON.stringify(window[objToSave]));
 }
 
+function loadData(objToLoad, isJSON = true) {
+	var obj = localStorage.getItem(objToLoad);
+	if (isJSON) {
+		window[objToLoad] = JSON.parse(obj);
+	} else {
+		window[objToLoad] = obj;
+	}
+}
+
+function loadAllData() {
+	$.each(keyGlobalVars, function (key, aGlobalVar) {
+		loadData(aGlobalVar);
+	});
+}
+
+function makeAllDataJSON() {
+	var allData = {};
+	$.each(keyGlobalVars, function (key, aGlobalVar) {
+		allData[aGlobalVar] = window[aGlobalVar];
+	});
+	
+	return allData;
+}
+
+function wasDataSaved() {
+	if (localStorage.getItem(savedDataFlag)) {
+		return true;
+	} else {
+		return false;
+	}
+}

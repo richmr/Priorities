@@ -70,7 +70,7 @@ function clicksaveProjectData() {
 		// Set priorityChips
 		priorityChips["priority-chipStage"].projectID = editProjectID;
 		// increment nextProjID
-		projects["nextProjID"] = editProjectID + 1;
+		projects["nextProjID"] = Number(editProjectID) + 1;
 	}
 	
   // Save basic data
@@ -286,7 +286,7 @@ function addTaskRow(taskObj = false) {
   });
 	
 	// increment the nextTaskID
-	$("#editProject-TaskList").data("nextTaskID", taskID+1);
+	$("#editProject-TaskList").data("nextTaskID", Number(taskID)+1);
 }
 
 function clickaddTaskButton() {

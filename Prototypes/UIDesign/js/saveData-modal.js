@@ -9,12 +9,18 @@ function initializeSaveData() {
 }	
 
 function clickOnSaveData () {
+	// First save to local storage
+	var allData = consolidateData();
+	saveAllData();	
+	
 	// Open the modal
 	$("#saveDataModal").modal('open');
-	var allData = consolidateData();
 	$("#saveDataField").val(JSON.stringify(allData));
 	$("#saveDataField").focus();
 	$("#saveDataField").select();
+	
+	
+	
 }
 
 
