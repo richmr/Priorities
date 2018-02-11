@@ -143,6 +143,7 @@ function clickOnLoadData () {
 	// Check for saved data
 	if (wasDataSaved()) {
 		// Get all of the saved data
+		loadAllData();
 		var savedData = makeAllDataJSON();
 		// Set the text area
 		$("#loadDataField").val(JSON.stringify(savedData));

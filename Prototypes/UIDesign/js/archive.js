@@ -1,6 +1,6 @@
 $( "#archive").droppable({
 	drop: function( event, ui ) {
-     console.log("Something was dropped on the archive");
+     //console.log("Something was dropped on the archive");
 		// Hide the item
 		ui.helper.hide();
 		ui.helper.data("revert", false);
@@ -132,4 +132,4 @@ function clearArchive() {
 }
 
 
-console.log("archive loaded");
+//console.log("archive loaded");

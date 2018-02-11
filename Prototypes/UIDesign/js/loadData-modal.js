@@ -156,4 +156,4 @@ function clickOnLoadData () {
 }
 
 
-console.log("loadData-modal loaded");
+//console.log("loadData-modal loaded");

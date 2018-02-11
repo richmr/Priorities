@@ -182,7 +182,7 @@ function editProject(projID, newProject=false) {
 	
 	// Iterate
 	$.each(tasks, function( index, value ) {
-		  console.log("Adding task: :" + value);
+		  //console.log("Adding task: :" + value);
 		  addTaskRow(value);
 		  
 	});

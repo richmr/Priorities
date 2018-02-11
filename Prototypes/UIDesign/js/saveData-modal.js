@@ -24,4 +24,4 @@ function clickOnSaveData () {
 }
 
 
-console.log("saveData-modal loaded");
+//console.log("saveData-modal loaded");

@@ -41,3 +41,6 @@
 								"rows":{"1":{"name":"Do this stuff", "slots":2}}
 							}
 }
+
+
+{"1":{"title":"Edit this one","status":"chip-status-red","draggable":true,"droppable":false,"click":"details","goal":"","tasks":[{"who":"Bob", "what":"Be your uncle", "when":""}],"note":""}

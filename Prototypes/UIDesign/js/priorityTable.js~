@@ -162,8 +162,7 @@ function initializePriorityTable() {
 		});
 	}	
 	
-	// Reset the portfolio title
-	$("#portfolioName").text(portfolios["name"]);	
+		
 	
 	// Builds the table from the data
 	$.each( priorityRowData["rows"], function( key, value ) {

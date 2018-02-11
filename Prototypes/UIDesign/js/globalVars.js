@@ -38,4 +38,4 @@ function consolidateData() {
 	return makeAllDataJSON();
 }
 
-console.log("Global vars loaded.");
+//console.log("Global vars loaded.");

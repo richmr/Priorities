@@ -17,7 +17,7 @@ function updatePriorityChip( chip ) {
 	// Check to see if the project exists
 	var thisProj
 	if (!(thisProj = projects[projID])) {
-		console.log("Project ID "+projID+" was not found, replaced with empty slot");
+		//console.log("Project ID "+projID+" was not found, replaced with empty slot");
 		priorityChips[chip.id].projectID = 0;
 		thisProj = projects[0];
 	} 	
@@ -246,4 +246,4 @@ function initializePriorityTable_old() {
 	});
 }
 
-console.log("PriorityTable loaded");
+//console.log("PriorityTable loaded");

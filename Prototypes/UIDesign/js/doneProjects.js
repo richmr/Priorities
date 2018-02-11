@@ -1,6 +1,6 @@
 $( "#doneProjects").droppable({
 	drop: function( event, ui ) {
-     console.log("Something was dropped on the doneProjects");
+     //console.log("Something was dropped on the doneProjects");
 		// Hide the item
 		ui.helper.hide();
 		ui.helper.data("revert", false);
@@ -133,4 +133,4 @@ function clearDoneProjects() {
 	});
 }
 
-console.log("doneProjects loaded");
+//console.log("doneProjects loaded");

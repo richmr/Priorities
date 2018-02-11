@@ -1,6 +1,6 @@
 $( "#graveyard").droppable({
 	drop: function( event, ui ) {
-     console.log("Something was dropped on the graveyard");
+     //console.log("Something was dropped on the graveyard");
 		// Hide the item
 		ui.helper.hide();
 		ui.helper.data("revert", false);
@@ -129,4 +129,4 @@ function clearGraveyard() {
 	});
 }
 
-console.log("graveyard loaded");
+//console.log("graveyard loaded");
