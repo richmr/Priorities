@@ -4,6 +4,7 @@
 <!--Import Google Icon Font-->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!--Import materialize.css-->
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 	<link type="text/css" rel="stylesheet" href="css/dynamic-chips.css"/>
 	<meta charset="utf-8">
@@ -295,6 +296,18 @@
 			    </div>
 		    </div>
 			
+			<!-- MVP Warning modal -->		    
+		    <div id="MVPWarningModal" class="modal">
+				<div id="MVPWarningModal-content" class="modal-content">
+			      <span id="MVPWarningModal-header"><h5>MVP Warning!</h5></span>
+			      MVP stands for "Minimum Viable Product".  This version of Priorities is fully functional but only stores your Priorities on your local machine.  Please click the <i class="tiny material-icons action-icons">save</i> and read the instructions!
+			      <br><br>You've been warned. 
+			   </div>
+			    <div id="MVPWarningModal-footer" class="modal-footer">
+				   <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat red">Ok</a>
+			    </div>
+		    </div>
+		    
 			<!-- Edit Table Row name modal -->		    
 		    <div id="editTableRowModal" class="modal">
 				<div id="editTableRowModal-content" class="modal-content">
