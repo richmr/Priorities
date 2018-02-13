@@ -170,8 +170,8 @@ function fileChosen() {
 	
 	// the readAsText function returns immediately and then fires once done reading
 	fileReader.onload = function (event) {
-		console.log("loaded: "+fileReader.result);
-		clickOnUpdateData(fileReader.result);
+		console.log("loaded: "+fileReader.results);
+		clickOnUpdateData(fileReader.results);
 	}
 	fileReader.readAsText(prioritiesJSONFile);
 }

@@ -10,6 +10,7 @@ $(document).ready(function(){
 	$("#MVPWarningModal").modal("open");    
 	
 	//initializeData();
+	if (wasDataSaved()) {loadAllData();}
 	newData();
 	initializeSaveData();
 	initializeLoadData();

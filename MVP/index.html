@@ -35,6 +35,7 @@
 					<span id="portfolioName">Portfolio Title</span>  <!-- <i class="small material-icons">arrow_drop_down</i> -->
 				</div>
 				<div class="col s2 offset-s3 valign-wrapper">
+					<input type="file" id="pickDataFile" name="upload" style="visibility: hidden; width: 1px; height: 1px" />
 					<a class="waves-effect" href="#!">
 						<i id="load_data" class="small material-icons action-icons" style="padding-right:5px">folder_open</i>
 					</a>
@@ -192,12 +193,9 @@
 		    <!-- Save Modal Definition -->
 			<div id="saveDataModal" class="modal save-modal">
 				<div id="saveDataModal-content" class="modal-content">
-			      <span id="saveDataModal-header"><h5>Save Data</h5></span>
-			      <div id="saveDataModal-message">Your data has been saved to this computer.<br>
-			      But I suggest you copy the information below to a separate document for safe keeping too.
+			      <span id="saveDataModal-header"><h5>Data Saved!</h5></span>
+			      <div id="saveDataModal-message">Your data has been saved to your web cache and downloaded as "<span id="saveDataFilename">filename</span>.<br>
 			      </div>
-			      <textarea id="saveDataField" class="save-modal" readonly>
-			      </textarea>     
 			    </div>
 			    <div class="modal-footer">
 				      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
@@ -366,6 +364,7 @@
 	<script type="text/javascript" src="js/editProject.js"></script>	
 	<script type="text/javascript" src="js/portfolioEdit.js"></script>	
 	<script type="text/javascript" src="js/lodash.core.js"></script>	
+	<script type="text/javascript" src="js/FileSaver.js"></script>	
 	<script type="text/javascript" src="js/prioritiesStartup.js"></script>	
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
