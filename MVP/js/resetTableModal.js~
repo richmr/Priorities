@@ -16,30 +16,27 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-
-$("#save_data").click(function(event) {
-		clickOnSaveData();		
+function initializeResetTable() {
+	// Activate the Reset Button
+	$("#resetTable").click(function (event) {
+		clickResetTable();
 	});
-
-function initializeSaveData() {
-	// Loop over the graveyarddProjects array
 	
-}	
-
-function clickOnSaveData () {
-	// First save to local storage
-	var allData = consolidateData();
-	saveAllData();	
-	
-	// Using saveAs() from https://github.com/eligrey/FileSaver.js 
-
-	var filename = $("#portfolioName").text()+".json";
-	$("#saveDataFilename").text(filename);
-  	var blob = new Blob([JSON.stringify(allData)], {type: "text/plain;charset=utf-8"});
-  	saveAs(blob, filename);
-	$("#saveDataModal").modal('open');
-	
+	// Activate the confirmation button
+	$("#confirmResetTable").click(function (event) {
+		clickConfirmReset();
+	});
 }
 
+function clickResetTable() {
+	// Open the modal
+	$("#resetTableModal").modal("open");
+}
 
-//console.log("saveData-modal loaded");
+function clickConfirmReset() {
+	// You asked for it
+	deleteStoredData();
+	loadResetState();
+	newData();
+	$("#resetTableModal").modal("close");
+}

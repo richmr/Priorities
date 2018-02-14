@@ -29,15 +29,15 @@ function updatePriorityChip( chip ) {
 		projID = priorityChips[chip.id].projectID;	
 	} else {
 		priorityChips[chip.id] = JSON.parse('{ "projectID":"stage", "blank":"stage"}');
-		projID = "stage";	
+		projID = 0;	
 	}	
 	
 	// Check to see if the project exists
 	var thisProj
 	if (!(thisProj = projects[projID])) {
 		//console.log("Project ID "+projID+" was not found, replaced with empty slot");
-		priorityChips[chip.id].projectID = "stage";
-		thisProj = projects["stage"];
+		priorityChips[chip.id].projectID = 0;
+		thisProj = projects[0];
 	} 	
 	
 	// Remove all current classes

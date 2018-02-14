@@ -116,7 +116,7 @@ function deleteStoredData() {
 
 function loadResetState() {
 	$.each(keyGlobalVars, function (key, aGlobalVar) {
-		window[aGlobalVar] = JSON.parse(resetState[aGlobalVar]);
+		window[aGlobalVar] = resetState[aGlobalVar];
 	});
 }
 

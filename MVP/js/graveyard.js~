@@ -145,7 +145,6 @@ function clearGraveyard() {
 	$('div[id^="graveyardPool"]').each(function( index ) {
 		$(this).empty();
 	});
-	$("#graveyard-count").text("0");
 }
 
 //console.log("graveyard loaded");

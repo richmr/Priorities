@@ -86,7 +86,7 @@ function clicksaveProjectData() {
 		projects[editProjectID]["droppable"] = true;
 		projects[editProjectID]["click"] = "details";
 		// Set priorityChips
-		priorityChips[chipBeingEdited.id].projectID = editProjectID;
+		priorityChips["priority-chipStage"].projectID = editProjectID;
 		// increment nextProjID
 		projects["nextProjID"] = Number(editProjectID) + 1;
 	}
@@ -121,14 +121,11 @@ function clicksaveProjectData() {
 	}
 	
 	// Notes should have already been saved by the "Save" button on the save modal
-	updatePriorityChip(chipBeingEdited);
-	/*
 	if (editNewProject) {
 		updatePriorityChip($("#priority-chipStage")[0]);
 	} else {				
 		updatePriorityChip(chipBeingEdited);
 	}
-	*/
 	$("#editProjectModal").modal("close");
 	//dataChanged();	
 }
