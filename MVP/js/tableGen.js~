@@ -94,7 +94,7 @@ function deleteRowFromTable(rowID, protectProjects = true) {
 		var projectsDetected = false;
 		$('div[id^="priority-row-'+rowID+'"]' ).each(function( index, value ) {
 			// Test what the projectID for this DOM element is
-			if ((priorityChips[value.id]["projectID"] != 0) && (priorityChips[value.id]["projectID"] != "stage") {
+			if ((priorityChips[value.id]["projectID"] != 0) && (priorityChips[value.id]["projectID"] != "stage")) {
 				projectsDetected = true;
 			}
 		});
@@ -113,6 +113,8 @@ function deleteRowFromTable(rowID, protectProjects = true) {
 	});
 	// Delete the row
 	$("#row-"+rowID).empty();
+	// Delete the row from the data
+	delete priorityRowData["rows"][rowID];	
 	
 	//dataChanged();
 }

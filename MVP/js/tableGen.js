@@ -113,6 +113,8 @@ function deleteRowFromTable(rowID, protectProjects = true) {
 	});
 	// Delete the row
 	$("#row-"+rowID).empty();
+	// Delete the row from the data
+	delete priorityRowData["rows"][rowID];	
 	
 	//dataChanged();
 }
