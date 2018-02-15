@@ -120,15 +120,10 @@ function clicksaveProjectData() {
 		}			
 	}
 	
-	// Notes should have already been saved by the "Save" button on the save modal
+	// Save the notes
+	projects[editProjectID]["note"] = $("#projectNoteField").val();
+	
 	updatePriorityChip(chipBeingEdited);
-	/*
-	if (editNewProject) {
-		updatePriorityChip($("#priority-chipStage")[0]);
-	} else {				
-		updatePriorityChip(chipBeingEdited);
-	}
-	*/
 	$("#editProjectModal").modal("close");
 	//dataChanged();	
 }
@@ -212,6 +207,8 @@ function editProject(projID, newProject=false) {
 	 
 	 // Set the note data
 	 $("#projectNoteField").val(note);
+	 // Make sure the collapsible is closed
+	 $('#projectNotes-collapsible').collapsible('close', 0);
 	 
 	// Needed to reset text fields
 	Materialize.updateTextFields();	 

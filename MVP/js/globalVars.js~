@@ -40,7 +40,7 @@ var doneProjects = [];
 var graveyardProjects = [];
 								
 var projects = { "0": {"title":" ", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"none"},
-						"stage": {"title":"Click to add project", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"add"},
+						"stage": {"title":"New Project", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"add"},
 						"nextProjID":"1"
 					};
 var prioritiesDataSaved = true;

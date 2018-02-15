@@ -44,6 +44,9 @@ var projects = { "0": {"title":" ", "status":"chip-placeholder", "draggable":fal
 						"nextProjID":"1"
 					};
 var prioritiesDataSaved = true;
+var permanentProjects = {"0": {"title":"New Project", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"add"},
+									"stage": {"title":"New Project", "status":"chip-placeholder", "draggable":false, "droppable":true, "click":"add"},
+								};
 
 function consolidateData() {
 	// Returns a consolidated JSON object with all data

@@ -30,7 +30,12 @@ $(document).ready(function(){
 	saveResetState();    
 	
 	//initializeData();
-	if (wasDataSaved()) {loadAllData();}
+	if (wasDataSaved()) {
+		loadAllData();
+	} else {
+		$("#MVPAboutModal").modal("open");
+	}
+	
 	newData();
 	initializeSaveData();
 	initializeLoadData();

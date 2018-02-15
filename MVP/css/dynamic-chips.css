@@ -3,8 +3,7 @@
 }
 
 .chip-placeholder-hover {
-	width: 90px;
-	border: 1px dashed green;
+	border: 2px dashed blue;
 }
 
 .chip-placeholder {

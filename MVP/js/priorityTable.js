@@ -33,11 +33,13 @@ function updatePriorityChip( chip ) {
 	}	
 	
 	// Check to see if the project exists
-	var thisProj
-	if (!(thisProj = projects[projID])) {
-		//console.log("Project ID "+projID+" was not found, replaced with empty slot");
-		priorityChips[chip.id].projectID = "stage";
-		thisProj = projects["stage"];
+	var thisProj;
+	if (!(thisProj = permanentProjects[projID])) {
+		if (!(thisProj = projects[projID])) {
+			//console.log("Project ID "+projID+" was not found, replaced with empty slot");
+			priorityChips[chip.id].projectID = "stage";
+			thisProj = projects["stage"];
+		}
 	} 	
 	
 	// Remove all current classes
@@ -146,8 +148,13 @@ function initializeTableChip(chip) {
 		}
     });
     $(chip).droppable({
-      over: function( event, ui ) {
-			//$(this).text("Left behind");
+	   over: function( event, ui ) {
+	   	//console.log("I'm over the chip");
+	   	$(this).removeClass("chip-placeholder").addClass("chip-placeholder-hover");
+		},
+		out: function( event, ui ) {
+			//console.log("I left the chip");
+			$(this).removeClass("chip-placeholder-hover").addClass("chip-placeholder");
 		},
 		drop: function( event, ui ) {
 			//$(this).text("Left behind");
@@ -155,13 +162,14 @@ function initializeTableChip(chip) {
 			
 			// Tag the helper to make sure it knows it landed somewhere else
 			$(ui.helper).data("revert", false);
-
+	
 			// Set this droppable to the new project number
 			priorityChips[$(this).attr("id")].projectID = $(ui.helper).data("originalProjNum");
 			
 			// Update the chip
 			updatePriorityChip(this);
-		}
+		},
+		tolerance: "pointer"
     });
     // Now establish the actual chip values
 	updatePriorityChip(chip);

@@ -59,7 +59,8 @@ function clickeditPortfolio() {
 
 function clickSavePortfolio() {
 	portfolios["name"] = $("#editPortfolioName").val();
-	initializePortfolio();
+	$("#portfolioName").text(portfolios["name"]);
+	//initializePortfolio();
 	//dataChanged("portfolios");
 	
 	$("#editPortfolioDataModal").modal("close");

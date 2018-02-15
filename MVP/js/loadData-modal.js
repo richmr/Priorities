@@ -26,7 +26,11 @@ $("#updateData").click(function (event) {
 	});
 
 $("#pickDataFile").change(function (event) {
-		fileChosen();	
+		fileChosen();			
+	});
+	
+$("#pickDataFile").click(function (event) {
+		this.value = null;			
 	});
 	
 function clickOnUpdateData(dataJSONString) {
@@ -188,8 +192,8 @@ function fileChosen() {
 	
 	// the readAsText function returns immediately and then fires once done reading
 	fileReader.onload = function (event) {
-		//console.log("loaded: "+fileReader.result);
 		clickOnUpdateData(fileReader.result);
+		
 	}
 	fileReader.readAsText(prioritiesJSONFile);
 }

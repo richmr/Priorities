@@ -3,12 +3,10 @@
 }
 
 .chip-placeholder-hover {
-	width: 90px;
-	border: 1px dashed gray;
+	border: 2px dashed green;
 }
 
 .chip-placeholder {
-	width: 90px;
 	border: 2px dashed gray;
 }
 .chip-status-red {

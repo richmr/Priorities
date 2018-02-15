@@ -35,6 +35,9 @@
 					<h5><span id="portfolioName">Portfolio Title</span></h5>  <!-- <i class="small material-icons">arrow_drop_down</i> -->
 				</div>
 				<div class="col s2 offset-s3 valign-wrapper">
+					<a class="waves-effect modal-trigger" href="#MVPAboutModal">
+						<i id="info" class="small material-icons action-icons" style="padding-right:5px">info_outline</i>
+					</a>
 					<input type="file" id="pickDataFile" name="upload" style="visibility: hidden; width: 1px; height: 1px" />
 					<a class="waves-effect" href="#!">
 						<i id="load_data" class="small material-icons action-icons" style="padding-right:5px">folder_open</i>
@@ -167,7 +170,7 @@
 			<div id="saveDataModal" class="modal save-modal">
 				<div id="saveDataModal-content" class="modal-content">
 			      <span id="saveDataModal-header"><h5>Data Saved!</h5></span>
-			      <div id="saveDataModal-message">Your data has been saved to your web cache and downloaded as "<span id="saveDataFilename">filename</span>.<br>
+			      <div id="saveDataModal-message">Your data has been saved to your web cache and downloaded as "<span id="saveDataFilename">filename</span>".<br>
 			      </div>
 			    </div>
 			    <div class="modal-footer">
@@ -245,10 +248,18 @@
 									</a>
 								</div>
         					</div>
+        					<ul id="projectNotes-collapsible" class="collapsible" data-collapsible="accordion">
+							    <li>
+							      <div class="collapsible-header"><i class="material-icons">list</i>Notes:</div>
+							      <div class="collapsible-body">
+								      <textarea id="projectNoteField" class="load-modal"></textarea>
+							      </div>
+							    </li>
+							 </ul>
         				</form>
 			    </div>
 			    <div class="modal-footer">
-				     <a id="addANote" href="#!" class="waves-effect waves-green btn-flat">Notes</a>
+				     <!-- <a id="addANote" href="#!" class="waves-effect waves-green btn-flat">Notes</a> -->
 				      <a id="saveProjectData" href="#!" class="waves-effect waves-green btn-flat">Save</a>
 				      <a id="cancelProjectData" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
 			    </div>
@@ -256,7 +267,7 @@
 		  </div>					
 		
 			<!-- Project notes modal -->		    
-		    <div id="addANoteModal" class="modal">
+		    <!-- <div id="addANoteModal" class="modal">
 				<div id="addANoteModal-content" class="modal-content">
 			      <span id="addANoteModal-header"><h5>Notes for this project:</h5></span>
 			      <textarea id="projectNoteField" class="load-modal"></textarea>
@@ -265,18 +276,23 @@
 			    	<a id="saveProjectNotes" href="#!" class="waves-effect waves-green btn-flat">Save</a>
 				   <a id="cancelProjectNotes" href="#!" class="waves-effect waves-green btn-flat">Cancel</a>
 			    </div>
-		    </div>
+		    </div> -->
 			
 			<!-- MVP Warning modal -->		    
-		    <div id="MVPWarningModal" class="modal">
-				<div id="MVPWarningModal-content" class="modal-content">
-			      <span id="MVPWarningModal-header"><h5>MVP Warning!</h5></span>
-			      MVP stands for "Minimum Viable Product".  This version of Priorities is fully functional but only stores your Priorities on your local machine.
-			      <br><br>Please click the <i class="tiny material-icons action-icons">save</i> and read the instructions!
-			      <br><br>You've been warned. 
+		    <div id="MVPAboutModal" class="modal">
+				<div id="MVPAboutModal-content" class="modal-content">
+			      <span id="MVPAboutModal-header"><h5>About PrioritiesMVP</h5></span>
+			      <p>MVP stands for "Minimum Viable Product".  This version of Priorities is fully functional but only stores your Priorities on your local machine.</p>
+			      <p><h5 class="red-text">Please click the <i class="small material-icons action-icons">save</i>!</h5></p>
+			      <a href="https://goo.gl/4k5A9j" target="_blank">The Priorities manual can be found here</a></p>
+			      <p>Priorities has only been tested in Chrome</p>
+			      <p>Priorities software is released under the MIT License</p>
+			      <p>Copyright 2018, Michael Rich</p>
+			      <p><a href="https://twitter.com/miketofet" target="_blank">Contact me on Twitter</a></p>
+			        
 			   </div>
-			    <div id="MVPWarningModal-footer" class="modal-footer">
-				   <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat red">Ok</a>
+			    <div id="MVPAboutModal-footer" class="modal-footer">
+				   <a href="#!" class="modal-action modal-close waves-effect waves-green btn green white-text">Ok</a>
 			    </div>
 		    </div>
 		    
