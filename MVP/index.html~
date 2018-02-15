@@ -285,8 +285,7 @@
 			      <p>MVP stands for "Minimum Viable Product".  This version of Priorities is fully functional but only stores your Priorities on your local machine.</p>
 			      <p><h5 class="red-text">Please click the <i class="small material-icons action-icons">save</i>!</h5></p>
 			      <a href="https://goo.gl/4k5A9j" target="_blank">The Priorities manual can be found here</a></p>
-			      <p>Priorities has only been tested in Chrome</p>
-			      <p>Priorities software is released under the MIT License</p>
+			      <p>Priorities has only been tested in Chrome and is released under the MIT License</p>
 			      <p>Copyright 2018, Michael Rich</p>
 			      <p><a href="https://twitter.com/miketofet" target="_blank">Contact me on Twitter</a></p>
 			        
