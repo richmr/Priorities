@@ -304,6 +304,9 @@ function addTaskRow(taskObj = false) {
 	    close: 'Ok',
 	    closeOnSelect: true // Close upon selecting a date,
   });
+  
+  // Put focus on the "Who"
+  $("#task-"+taskID+"-who").focus();
 	
 	// increment the nextTaskID
 	$("#editProject-TaskList").data("nextTaskID", Number(taskID)+1);

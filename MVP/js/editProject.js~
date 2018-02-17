@@ -207,6 +207,8 @@ function editProject(projID, newProject=false) {
 	 
 	 // Set the note data
 	 $("#projectNoteField").val(note);
+	 // Make sure the collapsible is closed
+	 $('#projectNotes-collapsible').collapsible('close', 0);
 	 
 	// Needed to reset text fields
 	Materialize.updateTextFields();	 
