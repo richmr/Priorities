@@ -54,3 +54,6 @@ function aTaskEntry(taskData, format=['effortTitle', ' : ', 'task']) {
 	return htmlstring;	
 }
 
+function listByPerson() {
+	// returns a well formatted list of tasks, grouped by "who"
+}
