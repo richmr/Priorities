@@ -16,16 +16,15 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-function createArrayOfTasks() {
-	// Creates an array of all the "Who", with their list of tasks
-	// Each entry is an object:
-	// {who: "theirName"
+function createAllTasksObject() {
+	// Creates an object of all the "Who", with their list of tasks
+	// 
 	// Thoughts
 	/*
 		- Go through each table row, find an active project
 				- For this project, go through task list
 					- For each task list entry create an entry in a dictionary:
-						{ [who]:[{ProjectName: " ", what: " ", ProjectPri: " ", when:" "}, {repeat}], [nextWho]}
+						{ [who]:[{ProjectID: " ", what: " ", ProjectSlot: " ", when:" "}, {repeat}], [nextWho]}
 		- Issues
 			- "Who" might be multiple words, so needs to be concatenated by a "_" (or other valid space designator)
 			- "Who" matching should be case insensitive
@@ -39,6 +38,20 @@ function createArrayOfTasks() {
 // Then we have to get the id of the object, and use this in the "priorityChips" object to get the projectID
 // Then we get the list of tasks from projects[projectID]["tasks"] and each has a "who", "what" , "when";
 //  Project Pri has to be pulled from the "-slot-x" addendum to each "priority-row-" and calculated to match the categories in priorityRowData
+// Nope: Lets just use the slot ID to put them in order after the fact.  
 // Project name is projects[id]["title"]
-//  				
+// Nope: let's pull the project name from the database dynamically
+ 				
+	var allTasks = {};
+	$('div[id^="priority-row-"]').each(function (index) {
+		// Get ID of object
+		var id = $(this).attr('id');
+		// Get project ID
+		var projID = priorityChips[id]["projectID"];
+		// Get task list
+		var tasklist = projects[projID]["tasks"];
+		// Begin iteration over the tasks
+
+
+ 				
 };
