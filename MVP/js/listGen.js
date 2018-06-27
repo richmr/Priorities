@@ -46,11 +46,23 @@ function createAllTasksObject() {
 	$('div[id^="priority-row-"]').each(function (index) {
 		// Get ID of object
 		var id = $(this).attr('id');
+		// Get slot num
+		// id is "priority-row-X-slot-Y"  So split on "-" and then grab last element
+		var slotnum = id.split("-").slice(-1)[0];		
 		// Get project ID
-		var projID = priorityChips[id]["projectID"];
+		var projID = priorityChips[id]["projectID"];		
 		// Get task list
 		var tasklist = projects[projID]["tasks"];
 		// Begin iteration over the tasks
+		$.each(tasklist, function (index, aTask) {
+			var who = aTask["who"];
+			var what = aTask["what"];
+			var when = aTask["when"];
+			// Need to 'normalize' the who - make it all lowercase
+			// When we print it, though, we should capitalize all the words
+			// https://stackoverflow.com/questions/4878756/how-to-capitalize-first-letter-of-each-word-like-a-2-word-city
+			who = who.toLowerCase();
+			});
 
 
  				
