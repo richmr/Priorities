@@ -50,7 +50,7 @@ function aTaskEntry(taskData, format=['title', ': ', 'what', 'optWhen']) {
 		} else if (value == "optWhen") {
 			// Not all tasks have dates, handle that here
 			if (taskData["when"].length) {
-				htmlstring += "by " + taskData["when"];
+				htmlstring += " by " + taskData["when"];
 			}
 		} else {
 			htmlstring += value;
@@ -59,21 +59,30 @@ function aTaskEntry(taskData, format=['title', ': ', 'what', 'optWhen']) {
 	return htmlstring;	
 }
 
+function toTitleCase(str) {
+	// https://stackoverflow.com/questions/4878756/how-to-capitalize-first-letter-of-each-word-like-a-2-word-city
+    return str.replace(/\w\S*/g, function(txt){
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+}
+
+
 function aNewPerson(who) {
 	// returns a html-formatted entry for the new person and adds an <hr>
 	htmlstring = "<p><h4>";
-	htmlstring += who;
+	htmlstring += toTitleCase(who);
 	htmlstring += "</h4></p><hr>";
 	return htmlstring;
 }
 
 function theTaskList(taskListObj) {
 	// returns a html-formatted list of all the tasks, ordered by priority slot
-	taskListObj = _.sort(taskListObj, ["ProjectSlot"]);
+	taskListObj = _.sortBy(taskListObj, function(o) {return o.ProjectSlot})
 	htmlstring = "<br>";
 	$.each(taskListObj, function (index, aTask) {
 		htmlstring += aTaskEntry(aTask) + "<br>";		
 	});
+	return htmlstring;
 }
 
 function listByPerson() {
@@ -82,6 +91,15 @@ function listByPerson() {
 	// tasks are ordered by prioritization slot
 	// Get the list of tasks
 	var alltasks = createAllTasksObject();
-	// Get the keys
-	var wholist
+	// Get the keys and sort them
+	var wholist = Object.keys(alltasks).sort();
+	// Iterate over keys
+	var htmlstring = "";
+	$.each(wholist, function (index, thiswho) {
+		// New person 
+		htmlstring += aNewPerson(thiswho);
+		// And their task list
+		htmlstring += theTaskList(alltasks[thiswho]);
+	});
+	return htmlstring;
 }
