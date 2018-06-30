@@ -36,17 +36,22 @@ function clickOnTaskList () {
 	
 }
 
-function aTaskEntry(taskData, format=['effortTitle', ' : ', 'task']) {
+function aTaskEntry(taskData, format=['title', ': ', 'what', 'optWhen']) {
 	// returns a html-formatted entry according to the format statement
 	// effortTitle = name of the effort
 	// task = print the task description
 	// Anything else prints as a string literal
 	var htmlstring = "";
 	$.each(format, function (index, value) {
-		if (value == "effortTitle") {
-			htmlstring += taskData["effortTitle"];
-		} else if (value == "task") {
-			htmlstring += taskData["task"];
+		if (value == "title") {
+			htmlstring += taskData["ProjectTitle"];
+		} else if (value == "what") {
+			htmlstring += taskData["what"];
+		} else if (value == "optWhen") {
+			// Not all tasks have dates, handle that here
+			if (taskData["when"].length) {
+				htmlstring += "by " + taskData["when"];
+			}
 		} else {
 			htmlstring += value;
 		}
@@ -54,6 +59,29 @@ function aTaskEntry(taskData, format=['effortTitle', ' : ', 'task']) {
 	return htmlstring;	
 }
 
+function aNewPerson(who) {
+	// returns a html-formatted entry for the new person and adds an <hr>
+	htmlstring = "<p><h4>";
+	htmlstring += who;
+	htmlstring += "</h4></p><hr>";
+	return htmlstring;
+}
+
+function theTaskList(taskListObj) {
+	// returns a html-formatted list of all the tasks, ordered by priority slot
+	taskListObj = _.sort(taskListObj, ["ProjectSlot"]);
+	htmlstring = "<br>";
+	$.each(taskListObj, function (index, aTask) {
+		htmlstring += aTaskEntry(aTask) + "<br>";		
+	});
+}
+
 function listByPerson() {
-	// returns a well formatted list of tasks, grouped by "who"
+	// returns a well formatted list of tasks, grouped and alphabetized by "who"
+	// To do that we have to pull and order the keys, and then use the ordered keys to grab the task object
+	// tasks are ordered by prioritization slot
+	// Get the list of tasks
+	var alltasks = createAllTasksObject();
+	// Get the keys
+	var wholist
 }
