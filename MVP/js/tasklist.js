@@ -69,9 +69,9 @@ function toTitleCase(str) {
 
 function aNewPerson(who) {
 	// returns a html-formatted entry for the new person and adds an <hr>
-	htmlstring = "<p><h4>";
+	htmlstring = "<p><b>";
 	htmlstring += toTitleCase(who);
-	htmlstring += "</h4></p><hr>";
+	htmlstring += "</b></p><hr>";
 	return htmlstring;
 }
 
