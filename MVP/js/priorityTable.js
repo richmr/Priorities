@@ -106,7 +106,6 @@ function initializeTableRow(rowID) {
 			editTableRow(rowID);		
 		}).data("rowID", rowID);
 		
-	
 	// This initializes all the chips in a row on the table, setting all necessary handlers
 	$('div[id^="priority-row-'+rowID+'"]' ).each(function( index ) {
 		initializeTableChip(this);
@@ -197,6 +196,9 @@ function initializePriorityTable() {
 		addRowToTable(key);
   		initializeTableRow(key);
 	});
+	
+	// Make it sortable?
+	$("#priorityTableDynamicContent").sortable({axis:"y"});
 }
 
 
@@ -214,6 +216,34 @@ function clearPriorityTable() {
 
 function clickAddRow() {
 	addRowToTable();
+}
+
+function swapRows(row1, row2) {
+	// Swaps the designated rows.
+	// Mainly used to move rows up and down.
+	// Basically swaps the data and then redraws the table
+	tempRowData = priorityRowData["rows"][row2];
+	priorityRowData["rows"][row2] = priorityRowData["rows"][row1];
+	priorityRowData["rows"][row1] = tempRowData;
+	// The above just swaps the row data (like the name), I have to also swap all the chip positions
+	// Due to my design, that's actually a pain in the butt
+	// Three cases:
+	// - row1 chip count = row2 chip count
+	// - row 1 chip count < row2 chip count
+	// - row 1 chip count > row2 chip count
+	// For NOW, all chip counts are fixed at 8.  No UI way to change the count
+	// In that case, its a simple swap of the values in each "projectID" element
+	for (i = 1; i <=8; i++) {
+		row1id = "priority-row-"+row1+"-spot-"+i;
+		row2id = "priority-row-"+row2+"-spot-"+i;
+		tempPriorityChipData = priorityChips[row2id];
+		priorityChips[row2id] = priorityChips[row1id];
+		priorityChips[row1id] = tempPriorityChipData;
+	}
+	// I guess that wasn't so bad afterall, for the simple case	
+	
+	clearPriorityTable();
+	initializePriorityTable();
 }
 
 //console.log("PriorityTable loaded");
