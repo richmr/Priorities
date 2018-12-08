@@ -289,6 +289,11 @@ function savePriorityTable() {
 	
 	saveData("priorityChips");
 	saveData("priorityRowData");
+	
+	// I think I need to redraw it too.
+	clearPriorityTable();
+	initializePriorityTable();
+	
 }
 
 //console.log("PriorityTable loaded");
