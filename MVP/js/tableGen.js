@@ -21,7 +21,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 function rowStart( rowID ) {
 	// Returns the html string start of the row
 	var rowname = priorityRowData["rows"][rowID]["name"];
-	var htmlstring = '<tr id="row-'+rowID+'"><td style="vertical-align:middle">';
+	var htmlstring = '<tr id="row-'+rowID+'" class="tableRow"><td style="vertical-align:middle">';
 	//htmlstring += '<i class="small material-icons" style="font-size: 2rem">arrow_drop_up</i><i class="small material-icons" style="font-size: 2rem">arrow_drop_down</i>';
 	htmlstring += '<span id="row-'+rowID+'-name" class="rowname">'+rowname+'</span></td>';
 	return htmlstring;
@@ -79,10 +79,12 @@ function newRow() {
 
 function addRowToTable(rowID=false) {
 	if (rowID) {
-		$("#lastTableRow").before(rowFromData(rowID));
+		//$("#lastTableRow").before(rowFromData(rowID));
+		$("#priorityTableDynamicContent").append(rowFromData(rowID));
 	} else {
 		rowID = newRow();
-		$("#lastTableRow").before(rowFromData(rowID));
+		//$("#lastTableRow").before(rowFromData(rowID));
+		$("#priorityTableDynamicContent").append(rowFromData(rowID));
 	}
 	
 	initializeTableRow(rowID);
@@ -117,17 +119,13 @@ function deleteRowFromTable(rowID, protectProjects = true) {
 	$("#row-"+rowID).empty();
 	// Delete the row from the data
 	delete priorityRowData["rows"][rowID];	
+	saveData("priorityRowData");
 	
 	//dataChanged();
 }
 
 function resetTable() {
-	var lastRowHTML = '<tr id="lastTableRow">' +
-							'<td>' +
-							'<a class="waves-effect" href="#!">' +
-							'<i id="addRowButton" class="small material-icons" style="font-size: 2rem">add_circle_outline</i>' +
-							'</a></td></tr>';
-	$("#priorityTableDynamicContent").html(lastRowHTML);
+	$("#priorityTableDynamicContent").empty();
 }
 
 

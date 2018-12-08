@@ -198,7 +198,10 @@ function initializePriorityTable() {
 	});
 	
 	// Make it sortable?
-	$("#priorityTableDynamicContent").sortable({axis:"y"});
+	$("#priorityTableDynamicContent").sortable({
+		axis:"y",
+		stop:function(event, ui) {savePriorityTable();}
+	});
 }
 
 
@@ -244,6 +247,48 @@ function swapRows(row1, row2) {
 	
 	clearPriorityTable();
 	initializePriorityTable();
+}
+
+function savePriorityTable() {
+	console.log("savePriorityTable() running");
+	// Ensures the priorityRowData and priorityChips are properly re-synchronized with the table
+	
+	rowID = 1;
+	newRows = {};
+	newPriorityChips = {};
+	newPriorityChips["priority-chipStage"] = priorityChips["priority-chipStage"];
+		
+	// First select all table rows
+	allTableRows = $(".tableRow");
+	// Now iterate over them.
+	allTableRows.each(function (index, aRow) {
+		// Get all the chips in this row
+		chipsThisRow = $(aRow).find(".chip");			
+		// First get the number of chip spots
+		numChips = chipsThisRow.length;
+		// Divide by number of categories to get slots per category
+		slots = numChips/priorityRowData["categories"].length;
+		// Set the new row data
+		newRows[rowID] = {"name":$(aRow).find(".rowname").html(), "slots":slots};
+		spot = 1;
+		// Now iterate over all the chips, set the current name and recall the chip data from the existing priorityChips
+		spotNameStart ="priority-row-"+rowID+"-spot-";
+		$.each(chipsThisRow, function (index, aChip) {
+			spotname = spotNameStart + spot;
+			newPriorityChips[spotname] = priorityChips[aChip.id];
+			spot += 1;	
+		});
+		// That row should be done
+		rowID += 1;
+	});
+	
+	// Assign the new data to the global vars
+	priorityRowData["rows"] = newRows;
+	priorityChips = newPriorityChips;
+	//Done?
+	
+	saveData("priorityChips");
+	saveData("priorityRowData");
 }
 
 //console.log("PriorityTable loaded");

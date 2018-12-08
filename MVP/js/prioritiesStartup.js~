@@ -31,10 +31,11 @@ $(document).ready(function(){
 	
 	//initializeData();
 	if (wasDataSaved()) {
-		loadAllData();}
+		loadAllData();
 	} else {
 		$("#MVPAboutModal").modal("open");
 	}
+	
 	newData();
 	initializeSaveData();
 	initializeLoadData();
@@ -67,6 +68,7 @@ function exitPriorities() {
 	saveArchive();
 	saveGraveyard();
 	saveDone();
+	savePriorityTable();
 	saveAllData();
 	return "Priorities data saved.";
 } 
