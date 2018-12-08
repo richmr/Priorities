@@ -107,6 +107,7 @@ function clickOnUpdateData(dataJSONString) {
 		stopDataProgressBar();
 		
 		if (fullSuccess) {
+			saveAllData();
 			newData();
 		} else {
 			addDataAnalysisCollectionItem("dataAnalysis-fail", "There are missing pieces of your data, I cannot continue");

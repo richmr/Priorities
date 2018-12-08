@@ -68,6 +68,7 @@ function exitPriorities() {
 	saveArchive();
 	saveGraveyard();
 	saveDone();
+	//savePriorityTable();
 	saveAllData();
 	return "Priorities data saved.";
 } 
