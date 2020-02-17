@@ -1,5 +1,5 @@
 <?php
-  include util/dbauth.php;
+  include 'util/dbauth.php';
   echo "Testing DB<br>";
   echo "$db_server:$db_user:$db_pass<br>";
 
